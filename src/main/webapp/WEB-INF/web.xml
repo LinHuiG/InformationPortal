@@ -4,4 +4,18 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <!-- 声明Servlet对象 -->
+    <servlet-name>ImageUpload</servlet-name>
+    <!-- 上面一句指定Servlet对象的名称 -->
+    <servlet-class>top.fxxxx.InformationPortal.Servlets.ImageUpload</servlet-class>
+    <!-- 上面一句指定Servlet对象的完整位置，包含包名和类名 -->
+  </servlet>
+     <servlet-mapping>
+         <!-- 映射Servlet -->
+         <servlet-name>ImageUpload</servlet-name>
+         <!--<servlet-name>与上面<Servlet>标签的<servlet-name>元素相对应，不可以随便起名  -->
+         <url-pattern>/ImageUpload</url-pattern>
+         <!-- 上面一句话用于映射访问URL -->
+     </servlet-mapping>
 </web-app>
