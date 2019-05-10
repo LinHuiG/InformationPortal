@@ -1,16 +1,14 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <body>
 <script type="text/javascript"src="ckeditor/ckeditor.js"></script>
 <form method="post" action="get.jsp">
     <textarea name="editor1" id="editor1" rows="10" cols="80">
-                This is my textarea to be replaced with CKEditor.
+                阿萨德
     </textarea>
-
-    <input type="submit">
+    <input type="submit" onclick="">
     <script>
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
         CKEDITOR.replace( 'editor1' );
     </script>
 </form>

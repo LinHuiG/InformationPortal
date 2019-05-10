@@ -19,6 +19,7 @@ class Account
         this.permissions=permissions;
         this.email=email;
     }
+
     public Account(String name,long id,String password,int permissions,String email,String info,String status)
     {
         this.name=name;
@@ -28,6 +29,24 @@ class Account
         this.email=email;
         this.info=info;
         this.status=status;
+    }
+    public String toString()
+    {
+        String s="name: "+name;
+        s+="\n";
+        s+="id: "+id;
+        s+="\n";
+        s+="password: " + password;
+        s+="\n";
+        s+= "permissions: "+permissions;
+        s+="\n";
+        s+="email: " +email;
+        s+="\n";
+        s+="info: "+ info;
+        s+="\n";
+        s+="status: "+ status;
+        s+="\n";
+        return  s;
     }
     public String getName() {
         return name;

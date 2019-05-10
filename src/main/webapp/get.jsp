@@ -12,7 +12,10 @@
 </head>
 <body>
 <%
-    out.print(request.getParameter("editor1"));
+    String s=request.getParameter("editor1");
+    s=new String(s.getBytes("iso-8859-1"),"utf-8");
+    System.out.println(s+"1231");
+    out.print(s.length()+"\n"+s);
 %>
 </body>
 </html>

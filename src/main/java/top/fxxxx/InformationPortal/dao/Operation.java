@@ -3,7 +3,7 @@ package top.fxxxx.InformationPortal.dao;
 import java.sql.*;
 
 public class Operation {
-    private static Connection getConn() {
+    protected static Connection getConn() {
 
     Connection conn = null;
     try {
@@ -17,7 +17,7 @@ public class Operation {
     }
     return conn;
 }
-    private static int insertAccount(Account account) {
+    protected static int insertAccount(Account account) {
         Connection conn = getConn();
         int i = 0;
         String sql = "insert into account (name,id,password,permissions,email,info,status) values(?,?,?,?,?,?,?)";
@@ -39,7 +39,7 @@ public class Operation {
         }
         return i;
     }
-    private static int insertArticle(Article article) {
+    protected static int insertArticle(Article article) {
         Connection conn = getConn();
         int i = 0;
         String sql = "insert into article (title,author,content,id,) values(?,?,?,?)";
@@ -60,7 +60,7 @@ public class Operation {
     }
 
 
-    private static int updateAccount(Account account) {
+    protected static int updateAccount(Account account) {
         Connection conn = getConn();
         int i = 0;
         String sql = "update account set name = ? , password = ?,permissions = ?,email = ? ,info = ? ,status = ? where id= ? ";
@@ -84,7 +84,7 @@ public class Operation {
         return i;
     }
 
-    private static int updateArticle(Article article) {
+    protected static int updateArticle(Article article) {
         Connection conn = getConn();
         int i = 0;
         String sql = "update article set title = ?,author = ?,content = ? where id= ? ";
@@ -104,7 +104,7 @@ public class Operation {
         }
         return i;
     }
-    private static Article getArticle(long id)
+    protected static Article getArticle(long id)
     {
         Connection conn = getConn();
         String sql = "select * from article where id = ?";
@@ -129,7 +129,7 @@ public class Operation {
         Article ans=new Article(title,author,content,id);
         return ans;
     }
-    private static Account getAccount(long id)
+    protected static Account getAccount(long id)
     {
         Connection conn = getConn();
         String sql = "select * from account where id = ?";
@@ -159,7 +159,7 @@ public class Operation {
         Account ans=new Account(name,id,password,permissions,email,info,status);
         return ans;
     }
-    private static Integer getAll() {
+    protected static Integer getAll() {
         Connection conn = getConn();
         String sql = "select * from students";
         PreparedStatement pstmt;
@@ -184,7 +184,7 @@ public class Operation {
         return null;
     }
 
-    private static int delete(String name) {
+    protected static int delete(String name) {
         Connection conn = getConn();
         int i = 0;
         String sql = "delete from students where Name='" + name + "'";
