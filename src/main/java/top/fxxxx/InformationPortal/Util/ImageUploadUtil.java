@@ -213,7 +213,7 @@ public class ImageUploadUtil {
         PrintWriter out = response.getWriter();
         out.print("<script type=\"text/javascript\">");
         out.print("window.parent.CKEDITOR.tools.callFunction("
-                + 1 + ",'" + imageContextPath
+                + callback + ",'" + imageContextPath
                  + "','')");
         out.print("</script>");
         out.flush();
