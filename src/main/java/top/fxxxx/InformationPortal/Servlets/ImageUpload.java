@@ -65,6 +65,7 @@ public class ImageUpload extends HttpServlet {
         PrintWriter out = response.getWriter();
         // CKEditor提交的很重要的一个参数
         String callback = request.getParameter("CKEditorFuncNum");
+        //callback="1";
         String expandedName = ""; // 文件扩展名
         if (uploadContentType.equals("image/pjpeg")
                 || uploadContentType.equals("image/jpeg")) {
@@ -114,9 +115,9 @@ public class ImageUpload extends HttpServlet {
 
         // 返回"图像"选项卡并显示图片  request.getContextPath()为web项目名
         out.println("<script type=\"text/javascript\">");
-        out.println("window.parent.CKEDITOR.tools.callFunction(" + callback
-                + ",'" + request.getContextPath() + "/img/uploadImg/" + fileName + "','')");
+        out.println("window.parent.CKEDITOR.tools.callFunction("+ callback + ",'"+"/img/uploadImg/" + fileName + "','')");
         out.println("</script>");
+
         return null;
     }
 
