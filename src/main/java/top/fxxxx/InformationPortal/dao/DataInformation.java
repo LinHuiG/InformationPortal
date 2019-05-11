@@ -55,13 +55,12 @@ class DataInformation {
         String sql= "CREATE TABLE IF NOT EXISTS article(\n" +
                 "   title VARCHAR(100),\n" +
                 "   author VARCHAR(100) NOT NULL,\n" +
-                "   content VARCHAR(20000) NOT NULL,\n" +
+                "   content LONGTEXT NOT NULL,\n" +
                 "   id VARCHAR(100) NOT NULL,\n" +
                 "   PRIMARY KEY ( id )\n" +
                 ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         Connection conn = Operation.getConn();
         int i = -1;
-
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
