@@ -6,14 +6,24 @@ public class Article
     private long author;
     private String content;
     private long id;
+    private long mydate;
     private String partof;
-    public Article(String title,long author,String content,String partof,long id)
+    public Article(String title,long author,String content,long mydate,String partof,long id)
     {
         this.author=author;
         this.content=content;
         this.title=title;
         this.id=id;
         this.partof=partof;
+        this.mydate=mydate;
+    }
+
+    public long getMydate() {
+        return mydate;
+    }
+
+    public void setMydate(long mydate) {
+        this.mydate = mydate;
     }
 
     public void setPartof(String partof) {

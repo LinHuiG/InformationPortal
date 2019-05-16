@@ -24,6 +24,12 @@ class DataInformation {
             System.out.println("创建Article表失败");
             return;
         }
+        i=creatArticlePart();
+        if(i!=0)
+        {
+            System.out.println("创建ArticlePart表失败");
+            return;
+        }
     }
     protected static Connection getConn() {
 
@@ -71,7 +77,32 @@ class DataInformation {
                 "   title VARCHAR(100),\n" +
                 "   author VARCHAR(100) NOT NULL,\n" +
                 "   partof VARCHAR(100) NOT NULL,\n" +
+                "   mydate VARCHAR(100) NOT NULL,\n" +
                 "   content LONGTEXT NOT NULL,\n" +
+                "   id VARCHAR(100) NOT NULL,\n" +
+                "   PRIMARY KEY ( id )\n" +
+                ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+        Connection conn = DataInformation.getConn();
+        int i = -1;
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    static int creatArticlePart()
+    {
+        String sql= "CREATE TABLE IF NOT EXISTS articlepart(\n" +
+                "   title VARCHAR(100),\n" +
+                "   author VARCHAR(100) NOT NULL,\n" +
+                "   partof VARCHAR(100) NOT NULL,\n" +
+                "   mydate VARCHAR(100) NOT NULL,\n" +
                 "   id VARCHAR(100) NOT NULL,\n" +
                 "   PRIMARY KEY ( id )\n" +
                 ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
