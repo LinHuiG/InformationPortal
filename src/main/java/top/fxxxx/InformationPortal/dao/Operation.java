@@ -1,6 +1,8 @@
 package top.fxxxx.InformationPortal.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Operation {
 
@@ -29,15 +31,16 @@ public class Operation {
     public static int insertArticle(Article article) {
         Connection conn = DataInformation.getConn();
         int i = 0;
-        String sql = "insert into article (title,author,content,partof,id,) values(?,?,?,?,?)";
+        String sql = "insert into article (title,author,content,mydate,partof,id,) values(?,?,?,?,?,?)";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
             pstmt.setString(2, article.getAuthor()+"");
             pstmt.setString(3, article.getContent());
-            pstmt.setString(4, article.getPartof());
-            pstmt.setString(5,article.getId()+"");
+            pstmt.setString(4, article.getMydate()+"");
+            pstmt.setString(5, article.getPartof());
+            pstmt.setString(6,article.getId()+"");
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -46,8 +49,6 @@ public class Operation {
         }
         return i;
     }
-
-
     public static int updateAccount(Account account) {
         Connection conn = DataInformation.getConn();
         int i = 0;
@@ -71,19 +72,19 @@ public class Operation {
         }
         return i;
     }
-
     public static int updateArticle(Article article) {
         Connection conn = DataInformation.getConn();
         int i = 0;
-        String sql = "update article set title = ?,author = ?,content = ?,partof = ? where id= ? ";
+        String sql = "update article set title = ?,author = ?,content = ?,mydate = ?,partof = ? where id= ? ";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
             pstmt.setString(2, article.getAuthor()+"");
             pstmt.setString(3, article.getContent());
-            pstmt.setString(4, article.getPartof());
-            pstmt.setString(5,article.getId()+"");
+            pstmt.setString(4, article.getMydate()+"");
+            pstmt.setString(5, article.getPartof());
+            pstmt.setString(6,article.getId()+"");
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -92,14 +93,14 @@ public class Operation {
         }
         return i;
     }
-    public static Article getArticle(long id)
-    {
+    public static Article getArticle(long id) {
         Connection conn =DataInformation.getConn();
         String sql = "select * from article where id = ?";
         PreparedStatement pstmt;
         String title="";
         long author=0;
         String content="";
+        long mydate=0;
         String partof="";
         try {
             pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -108,6 +109,7 @@ public class Operation {
             while (rs.next()) {
                 title=rs.getString("title");
                 author=Long.valueOf(rs.getString("author"));
+                mydate=Long.valueOf(rs.getString("mydate"));
                 content=rs.getString("content");
                 partof=rs.getString("partof");
             }
@@ -115,11 +117,10 @@ public class Operation {
             e.printStackTrace();
         }
 
-        Article ans=new Article(title,author,content,partof,id);
+        Article ans=new Article(title,author,content,mydate,partof,id);
         return ans;
     }
-    public static Account getAccount(long id)
-    {
+    public static Account getAccount(long id) {
         Connection conn = DataInformation.getConn();
         String sql = "select * from account where id = ?";
         PreparedStatement pstmt;
@@ -148,40 +149,14 @@ public class Operation {
         Account ans=new Account(name,id,password,permissions,email,info,status);
         return ans;
     }
-    public static Integer getAll() {
-        Connection conn =DataInformation.getConn();
-        String sql = "select * from students";
-        PreparedStatement pstmt;
-        try {
-            pstmt = (PreparedStatement)conn.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();
-            int col = rs.getMetaData().getColumnCount();
-            System.out.println("============================");
-            while (rs.next()) {
-                for (int i = 1; i <= col; i++) {
-                    System.out.print(rs.getString(i) + "\t");
-                    if ((i == 2) && (rs.getString(i).length() < 8)) {
-                        System.out.print("\t");
-                    }
-                }
-                System.out.println("");
-            }
-            System.out.println("============================");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static int delete(String name) {
+    public static int deleteArticle(long id) {
         Connection conn =DataInformation.getConn();
         int i = 0;
-        String sql = "delete from students where Name='" + name + "'";
+        String sql = "delete from article where id='" + id + "'";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             i = pstmt.executeUpdate();
-            System.out.println("resutl: " + i);
             pstmt.close();
             conn.close();
         } catch (SQLException e) {
@@ -189,8 +164,108 @@ public class Operation {
         }
         return i;
     }
-    public static void main(String[] args)
-    {
+    public static int deleteAccount(long id) {
+        Connection conn =DataInformation.getConn();
+        int i = 0;
+        String sql = "delete from account where id='" + id + "'";
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+    public static Article getArticlePartof(long id) {
+        Connection conn =DataInformation.getConn();
+        String sql = "select * from articlepart where id = ?";
+        PreparedStatement pstmt;
+        String title="";
+        long author=0;
+        long mydate=0;
+        String partof="";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id+"");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                title=rs.getString("title");
+                author=Long.valueOf(rs.getString("author"));
+                mydate=Long.valueOf(rs.getString("mydate"));
+                partof=rs.getString("partof");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Article ans=new Article(title,author,"",mydate,partof,id);
+        return ans;
+    }
+    public static int insertArticlePartof(Article article) {
+        Connection conn = DataInformation.getConn();
+        int i = 0;
+        String sql = "insert into articlepart (title,author,mydate,partof,id,) values(?,?,?,?,?)";
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            pstmt.setString(1, article.getTitle());
+            pstmt.setString(2, article.getAuthor()+"");
+            pstmt.setString(3, article.getMydate()+"");
+            pstmt.setString(4, article.getPartof());
+            pstmt.setString(5,article.getId()+"");
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+    public static int deleteArticlePartof(long id) {
+        Connection conn =DataInformation.getConn();
+        int i = 0;
+        String sql = "delete from articlepart where id='" + id + "'";
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+    public static List<Article> getArticlePartof(String partof) {
+        List<Article> ans=new ArrayList<>();
+        Connection conn =DataInformation.getConn();
+        String sql = "select * from articlepart where partof = ?";
+        PreparedStatement pstmt;
+        String title="";
+        long author=0;
+        long mydate=0;
+        long id=0;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, partof);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                title=rs.getString("title");
+                author=Long.valueOf(rs.getString("author"));
+                mydate=Long.valueOf(rs.getString("mydate"));
+                partof=rs.getString("partof");
+                ans.add(new Article(title,author,"",mydate,partof,id));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ans;
+    }
+    public static void main(String[] args) {
 /*
         getAll();
         System.out.println("111");

@@ -3,22 +3,42 @@ package top.fxxxx.InformationPortal.dao;
 public class Article
 {
     private String title;
-    private String author;
+    private long author;
     private String content;
     private long id;
-    public Article(String title,String author,String content,long id)
+    private long mydate;
+    private String partof;
+    public Article(String title,long author,String content,long mydate,String partof,long id)
     {
         this.author=author;
         this.content=content;
         this.title=title;
         this.id=id;
+        this.partof=partof;
+        this.mydate=mydate;
+    }
+
+    public long getMydate() {
+        return mydate;
+    }
+
+    public void setMydate(long mydate) {
+        this.mydate = mydate;
+    }
+
+    public void setPartof(String partof) {
+        this.partof = partof;
+    }
+
+    public String getPartof() {
+        return partof;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getAuthor() {
+    public long getAuthor() {
         return author;
     }
 
@@ -30,7 +50,7 @@ public class Article
         return title;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(long author) {
         this.author = author;
     }
 
