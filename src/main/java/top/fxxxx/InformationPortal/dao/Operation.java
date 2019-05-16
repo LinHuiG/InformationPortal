@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Operation {
 
-    protected static int insertAccount(Account account) {
+    public static int insertAccount(Account account) {
         Connection conn = DataInformation.getConn();
         int i = 0;
         String sql = "insert into account (name,id,password,permissions,email,info,status) values(?,?,?,?,?,?,?)";
@@ -26,17 +26,18 @@ public class Operation {
         }
         return i;
     }
-    protected static int insertArticle(Article article) {
+    public static int insertArticle(Article article) {
         Connection conn = DataInformation.getConn();
         int i = 0;
-        String sql = "insert into article (title,author,content,id,) values(?,?,?,?)";
+        String sql = "insert into article (title,author,content,partof,id,) values(?,?,?,?,?)";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
             pstmt.setString(2, article.getAuthor()+"");
             pstmt.setString(3, article.getContent());
-            pstmt.setString(4,article.getId()+"");
+            pstmt.setString(4, article.getPartof());
+            pstmt.setString(5,article.getId()+"");
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -47,7 +48,7 @@ public class Operation {
     }
 
 
-    protected static int updateAccount(Account account) {
+    public static int updateAccount(Account account) {
         Connection conn = DataInformation.getConn();
         int i = 0;
         String sql = "update account set name = ? , password = ?,permissions = ?,email = ? ,info = ? ,status = ? where id= ? ";
@@ -71,18 +72,18 @@ public class Operation {
         return i;
     }
 
-    protected static int updateArticle(Article article) {
+    public static int updateArticle(Article article) {
         Connection conn = DataInformation.getConn();
         int i = 0;
-        String sql = "update article set title = ?,author = ?,content = ? where id= ? ";
+        String sql = "update article set title = ?,author = ?,content = ?,partof = ? where id= ? ";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
-
             pstmt.setString(2, article.getAuthor()+"");
             pstmt.setString(3, article.getContent());
-            pstmt.setString(4,article.getId()+"");
+            pstmt.setString(4, article.getPartof());
+            pstmt.setString(5,article.getId()+"");
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -91,32 +92,33 @@ public class Operation {
         }
         return i;
     }
-    protected static Article getArticle(long id)
+    public static Article getArticle(long id)
     {
         Connection conn =DataInformation.getConn();
         String sql = "select * from article where id = ?";
         PreparedStatement pstmt;
         String title="";
-        String author="";
+        long author=0;
         String content="";
+        String partof="";
         try {
             pstmt = (PreparedStatement)conn.prepareStatement(sql);
             pstmt.setString(1, id+"");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title=rs.getString("title");
-                author=rs.getString("author");
+                author=Long.valueOf(rs.getString("author"));
                 content=rs.getString("content");
-
+                partof=rs.getString("partof");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        Article ans=new Article(title,author,content,id);
+        Article ans=new Article(title,author,content,partof,id);
         return ans;
     }
-    protected static Account getAccount(long id)
+    public static Account getAccount(long id)
     {
         Connection conn = DataInformation.getConn();
         String sql = "select * from account where id = ?";
@@ -146,7 +148,7 @@ public class Operation {
         Account ans=new Account(name,id,password,permissions,email,info,status);
         return ans;
     }
-    protected static Integer getAll() {
+    public static Integer getAll() {
         Connection conn =DataInformation.getConn();
         String sql = "select * from students";
         PreparedStatement pstmt;
@@ -171,7 +173,7 @@ public class Operation {
         return null;
     }
 
-    protected static int delete(String name) {
+    public static int delete(String name) {
         Connection conn =DataInformation.getConn();
         int i = 0;
         String sql = "delete from students where Name='" + name + "'";

@@ -103,22 +103,32 @@ class Account
 class Article
 {
     private String title;
-    private String author;
+    private long author;
     private String content;
     private long id;
-    public Article(String title,String author,String content,long id)
+    private String partof;
+    public Article(String title,long author,String content,String partof,long id)
     {
         this.author=author;
         this.content=content;
         this.title=title;
         this.id=id;
+        this.partof=partof;
+    }
+
+    public void setPartof(String partof) {
+        this.partof = partof;
+    }
+
+    public String getPartof() {
+        return partof;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getAuthor() {
+    public long getAuthor() {
         return author;
     }
 
@@ -130,7 +140,7 @@ class Article
         return title;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(long author) {
         this.author = author;
     }
 
