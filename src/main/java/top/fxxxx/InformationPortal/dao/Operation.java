@@ -3,22 +3,9 @@ package top.fxxxx.InformationPortal.dao;
 import java.sql.*;
 
 public class Operation {
-    protected static Connection getConn() {
 
-    Connection conn = null;
-    try {
-        Class.forName(DataInformation.driver); //classLoader,加载对应驱动
-        conn = (Connection) DriverManager.getConnection(DataInformation.url, DataInformation.username, DataInformation.password);
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return conn;
-}
     protected static int insertAccount(Account account) {
-        Connection conn = getConn();
+        Connection conn = DataInformation.getConn();
         int i = 0;
         String sql = "insert into account (name,id,password,permissions,email,info,status) values(?,?,?,?,?,?,?)";
         PreparedStatement pstmt;
@@ -40,7 +27,7 @@ public class Operation {
         return i;
     }
     protected static int insertArticle(Article article) {
-        Connection conn = getConn();
+        Connection conn = DataInformation.getConn();
         int i = 0;
         String sql = "insert into article (title,author,content,id,) values(?,?,?,?)";
         PreparedStatement pstmt;
@@ -61,7 +48,7 @@ public class Operation {
 
 
     protected static int updateAccount(Account account) {
-        Connection conn = getConn();
+        Connection conn = DataInformation.getConn();
         int i = 0;
         String sql = "update account set name = ? , password = ?,permissions = ?,email = ? ,info = ? ,status = ? where id= ? ";
         PreparedStatement pstmt;
@@ -85,7 +72,7 @@ public class Operation {
     }
 
     protected static int updateArticle(Article article) {
-        Connection conn = getConn();
+        Connection conn = DataInformation.getConn();
         int i = 0;
         String sql = "update article set title = ?,author = ?,content = ? where id= ? ";
         PreparedStatement pstmt;
@@ -106,7 +93,7 @@ public class Operation {
     }
     protected static Article getArticle(long id)
     {
-        Connection conn = getConn();
+        Connection conn =DataInformation.getConn();
         String sql = "select * from article where id = ?";
         PreparedStatement pstmt;
         String title="";
@@ -131,7 +118,7 @@ public class Operation {
     }
     protected static Account getAccount(long id)
     {
-        Connection conn = getConn();
+        Connection conn = DataInformation.getConn();
         String sql = "select * from account where id = ?";
         PreparedStatement pstmt;
         String name="";
@@ -160,7 +147,7 @@ public class Operation {
         return ans;
     }
     protected static Integer getAll() {
-        Connection conn = getConn();
+        Connection conn =DataInformation.getConn();
         String sql = "select * from students";
         PreparedStatement pstmt;
         try {
@@ -185,7 +172,7 @@ public class Operation {
     }
 
     protected static int delete(String name) {
-        Connection conn = getConn();
+        Connection conn =DataInformation.getConn();
         int i = 0;
         String sql = "delete from students where Name='" + name + "'";
         PreparedStatement pstmt;
