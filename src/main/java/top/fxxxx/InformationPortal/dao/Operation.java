@@ -31,7 +31,7 @@ public class Operation {
     public static int insertArticle(Article article) {
         Connection conn = DataInformation.getConn();
         int i = 0;
-        String sql = "insert into article (title,author,content,mydate,partof,id,) values(?,?,?,?,?,?)";
+        String sql = "insert into article (title,author,content,mydate,partof,id) values(?,?,?,?,?,?)";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -93,33 +93,6 @@ public class Operation {
         }
         return i;
     }
-    public static Article getArticle(long id) {
-        Connection conn =DataInformation.getConn();
-        String sql = "select * from article where id = ?";
-        PreparedStatement pstmt;
-        String title="";
-        long author=0;
-        String content="";
-        long mydate=0;
-        String partof="";
-        try {
-            pstmt = (PreparedStatement)conn.prepareStatement(sql);
-            pstmt.setString(1, id+"");
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                title=rs.getString("title");
-                author=Long.valueOf(rs.getString("author"));
-                mydate=Long.valueOf(rs.getString("mydate"));
-                content=rs.getString("content");
-                partof=rs.getString("partof");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        Article ans=new Article(title,author,content,mydate,partof,id);
-        return ans;
-    }
     public static Account getAccount(long id) {
         Connection conn = DataInformation.getConn();
         String sql = "select * from account where id = ?";
@@ -149,20 +122,32 @@ public class Operation {
         Account ans=new Account(name,id,password,permissions,email,info,status);
         return ans;
     }
-    public static int deleteArticle(long id) {
+    public static Article getArticle(long id) {
         Connection conn =DataInformation.getConn();
-        int i = 0;
-        String sql = "delete from article where id='" + id + "'";
+        String sql = "select * from article where id = ?";
         PreparedStatement pstmt;
+        String title="";
+        long author=0;
+        String content="";
+        long mydate=0;
+        String partof="";
         try {
-            pstmt = (PreparedStatement) conn.prepareStatement(sql);
-            i = pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
+            pstmt = (PreparedStatement)conn.prepareStatement(sql);
+            pstmt.setString(1, id+"");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                title=rs.getString("title");
+                author=Long.valueOf(rs.getString("author"));
+                mydate=Long.valueOf(rs.getString("mydate"));
+                content=rs.getString("content");
+                partof=rs.getString("partof");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return i;
+
+        Article ans=new Article(title,author,content,mydate,partof,id);
+        return ans;
     }
     public static int deleteAccount(long id) {
         Connection conn =DataInformation.getConn();
@@ -179,55 +164,10 @@ public class Operation {
         }
         return i;
     }
-    public static Article getArticlePartof(long id) {
-        Connection conn =DataInformation.getConn();
-        String sql = "select * from articlepart where id = ?";
-        PreparedStatement pstmt;
-        String title="";
-        long author=0;
-        long mydate=0;
-        String partof="";
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, id+"");
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                title=rs.getString("title");
-                author=Long.valueOf(rs.getString("author"));
-                mydate=Long.valueOf(rs.getString("mydate"));
-                partof=rs.getString("partof");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        Article ans=new Article(title,author,"",mydate,partof,id);
-        return ans;
-    }
-    public static int insertArticlePartof(Article article) {
-        Connection conn = DataInformation.getConn();
-        int i = 0;
-        String sql = "insert into articlepart (title,author,mydate,partof,id,) values(?,?,?,?,?)";
-        PreparedStatement pstmt;
-        try {
-            pstmt = (PreparedStatement) conn.prepareStatement(sql);
-            pstmt.setString(1, article.getTitle());
-            pstmt.setString(2, article.getAuthor()+"");
-            pstmt.setString(3, article.getMydate()+"");
-            pstmt.setString(4, article.getPartof());
-            pstmt.setString(5,article.getId()+"");
-            i = pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return i;
-    }
-    public static int deleteArticlePartof(long id) {
+    public static int deleteArticle(long id) {
         Connection conn =DataInformation.getConn();
         int i = 0;
-        String sql = "delete from articlepart where id='" + id + "'";
+        String sql = "delete from article where id='" + id + "'";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -242,7 +182,7 @@ public class Operation {
     public static List<Article> getArticlePartof(String partof) {
         List<Article> ans=new ArrayList<>();
         Connection conn =DataInformation.getConn();
-        String sql = "select * from articlepart where partof = ?";
+        String sql = "select * from article where partof = ? order by mydate desc limit 6";
         PreparedStatement pstmt;
         String title="";
         long author=0;
@@ -256,6 +196,7 @@ public class Operation {
                 title=rs.getString("title");
                 author=Long.valueOf(rs.getString("author"));
                 mydate=Long.valueOf(rs.getString("mydate"));
+                System.out.println(mydate);
                 partof=rs.getString("partof");
                 ans.add(new Article(title,author,"",mydate,partof,id));
             }
