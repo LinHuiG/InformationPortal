@@ -16,7 +16,7 @@
     title=new String(title.getBytes("iso-8859-1"),"utf-8");
     String content=request.getParameter("editor1");
     content=new String(content.getBytes("iso-8859-1"),"utf-8");
-    System.out.println(title +content+"1231");
+    System.out.println(title +content);
     out.print(title+content.length()+"\n"+content);
 %>
 </body>

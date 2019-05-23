@@ -1,59 +1,60 @@
 <%--
   Created by IntelliJ IDEA.
   User: fyx
-  Date: 2018/10/21
-  Time: 18:06
+  Date: 2018/10/17
+  Time: 14:08
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    String e=request.getParameter("error");
 %>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
     <base href="<%=basePath%>">
-    <title>Register</title>
+    <title>Login</title>
 </head>
-<body onload="initBody()">
+<body  onload="initBody()">
+<%
+    // 获取浏览器发送过来的cookie, 获取用户信息
+    Cookie[] cookies = request.getCookies();
+    String username = "";
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("username".equals(cookie.getName())) {
+                username = cookie.getValue();
+            }
+        }
+    }
+%>
 <span style="color: red; ">${requestScope.message}</span>
-<form action="./RegisterServlet" method="post">
-    Account:<input type="text" name="Account" value=""><span
+<form action="./LoginServlet" method="post">
+    Account:<input type="text" name="Account" value="<%= username%>"><span
         style="color: red; ">${requestScope.error}</span>
     <br>
-    Email:<input type="text" name="Email" value="">
-    <br>
     Password:<input type="password" name="Password">
-    <br>
-    Password(comfirm):<input type="password" name="Check">
     <br>
     CAPTCHA:<input type="text" name="CAPTCHA">
     <img id="verify">
     <input type="button" value="看不清? 换一张。" id="btn"><font color="red">${requestScope.verifyerror}</font>
     <br>
-    <input type="submit" value="Register" onclick="
+    <input type="submit" value="Login" onclick="
     if(Account.value===''){
     alert('Account shouldn\'t be empty.');
     return false;
 }else if(Password.value===''){
     alert('Password shouldn\'t be empty.');
     return false;
-}else if(Check.value===''){
-    alert('Password(comfirm) shouldn\'t be empty.');
-    return false;
 }else if(CAPTCHA.value===''){
     alert('CAPTCHA shouldn\'t be empty.');
     return false;
-}else if(Password.value!==Check.value){
-    alert('Passwords do not match.');
-    return false;
 }">
 </form>
-<strong><span style="color: #990000; " id="error"></span></strong><br>
+<input type = "button" value = "Register" onclick = "window.location.href = './register.jsp'">
+<br>
 <script type="text/javascript">
 
     document.getElementById("btn").onclick = function () {
@@ -63,9 +64,6 @@
     };
     function initBody() {
         changeImg();
-        if(<%=e!=null%>){
-            document.getElementById("error").innerHTML=<%='\"'+e+'\"'%>;
-        }
     }
     function changeImg() {
         document.getElementById("verify").src =
