@@ -7,23 +7,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="top.fxxxx.InformationPortal.dao.*" %>
-<jsp:useBean class="top.fxxxx.InformationPortal.javabean.bean" id="bean"/>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    <form action="" method="post">
-        <input type="text" name="id" />
-        <input type="text" name="password" />
+    <form action="signin_process.jsp" method="post">
+        <br>用户名
+        <br>  <input type="text" name="id" />
+        <br>密码
+        <br>  <input type="password" name="password" />
+        <br><input type="submit" value="确认" >
     </form>
-<%
-    Account ac;
-    long id=Integer.parseInt(request.getParameter("id"));
-    ac=Operation.getAccount(id);
-    String pas=request.getParameter("password");
-
-
-%>
 </body>
 </html>
