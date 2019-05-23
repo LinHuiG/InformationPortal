@@ -12,6 +12,10 @@
     <title>Title</title>
 </head>
 <body>
+    <%
+        String state= String.valueOf(session.getAttribute("state"));
+        if(state!=null)out.print(state);
+    %>
     <form action="signin_process.jsp" method="post">
         <br>用户名
         <br>  <input type="text" name="id" />

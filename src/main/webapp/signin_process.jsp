@@ -11,7 +11,8 @@
     ac=Operation.getAccount(id);
     String pas=request.getParameter("password");
     if(!pas.equals(ac.getPassword())){
-        session.setAttribute("state","你输入的用户名和密码不匹配或者用户不存在");
+        session.setAttribute("state","你输入的用户名和密码不匹配");
+        if(pas.equals(""))session.setAttribute("state","用户不存在");
         response.sendRedirect("signin.jsp");
     }
     else{
