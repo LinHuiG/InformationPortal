@@ -20,40 +20,49 @@
     if (request.getParameter("thispage") != null && !request.getParameter("thispage").equals(""))
         thispage = Integer.valueOf(request.getParameter("thispage"));
     int count = Operation.getArticlePartofNum(partof);
-    List<Article> articles = Operation.getArticlePartof(partof, thispage * 10, thispage * 10 + 10);
+    int lastpage=(count+14)/15-1;
+    if(lastpage<0)lastpage=0;
+    if(thispage<0)thispage=0;
+    if(thispage>lastpage)thispage=lastpage;
+    List<Article> articles = Operation.getArticlePartof(partof, thispage * 15, thispage * 15+ 15);
     for (Article article : articles) {
         String title = article.getTitle();
         String title2;
-        Long data = article.getMydate();
+        long data = article.getMydate();
+        long id = article.getId();
         if (title.length() > 20) title2 = title.substring(0, 17) + "...";
         else title2 = title;
         out.print("<tbody><tr> \n" +
-                "<td align=\"left\"><a href=\"/2019/0227/c2828a187836/page.htm\" target=\"_blank\" title=\"" + title + "\">" + title2 + "</a></td> \n" +
+                "<td align=\"left\"><a href=\"getarticle.jsp?article_id="+id+"\" target=\"_blank\" title=\"" + title + "\">" + title2 + "</a></td> \n" +
                 " \n" +
-                "<td align=\"left\" width=\"30px\"><div style=\"white-space:nowrap\">02-27</div></td> \n" +
+                "<td align=\"left\" width=\"30px\"><div style=\"white-space:nowrap\">"+data+"</div></td> \n" +
                 " \n" +
                 "</tr> \n" +
                 "</tbody>"
         );
     }
-    out.print(
-            "<ul class=\"wp_paging clearfix\"> \n" +
-            "     <li class=\"pages_count\"> \n" +
-            "         <span class=\"per_page\">每页&nbsp;<em class=\"per_count\">14</em>&nbsp;记录&nbsp;</span> \n" +
-            "         <span class=\"all_count\">总共&nbsp;<em class=\"all_count\">237</em>&nbsp;记录&nbsp;</span> \n" +
-            "     </li> \n" +
-            "     <li class=\"page_nav\"> \n" +
-            "         <a class=\"first\" href=\"javascript:void(0);\" target=\"_self\"><span>第一页</span></a> \n" +
-            "         <a class=\"prev\" href=\"javascript:void(0);\" target=\"_self\"><span>&lt;&lt;上一页</span></a> \n" +
-            "         <a class=\"next\" href=\"/2830/list2.htm\" target=\"_self\"><span>下一页&gt;&gt;</span></a> \n" +
-            "         <a class=\"last\" href=\"/2830/list17.htm\" target=\"_self\"><span>尾页</span></a> \n" +
-            "     </li> \n" +
-            "     <li class=\"page_jump\"> \n" +
-            "         <span class=\"pages\">页码&nbsp;<em class=\"curr_page\">1</em>/<em class=\"all_pages\">17</em></span> \n" +
-            "         <span><input class=\"pageNum\" type=\"text\"><input type=\"hidden\" class=\"currPageURL\" value=\"\"></span> \n" +
-            "         <span><a class=\"pagingJump\" href=\"javascript:void(0);\" target=\"_self\">跳转到&nbsp;</a></span> \n" +
-            "     </li> \n" +
-            "</ul>");
 %>
+<div id="wp_paging_w3">
+    <ul class="wp_paging clearfix">
+        <li class="pages_count">
+            <span class="per_page">每页&nbsp;<em class="per_count">15</em>&nbsp;记录&nbsp;</span>
+            <span class="all_count">总共&nbsp;<em class="all_count"><%=count%></em>&nbsp;记录&nbsp;</span>
+        </li>
+        <li class="page_nav">
+            <a class="first" href="getpart.jsp?partof=<%=partof%>&thispage=0" target="_self"><span>第一页</span></a>
+            <a class="prev" href="getpart.jsp?partof=<%=partof%>&thispage=<%=thispage-1%>" target="_self"><span>&lt;&lt;上一页</span></a>
+            <a class="next" href="getpart.jsp?partof=<%=partof%>&thispage=<%=thispage+1%>" target="_self"><span>下一页&gt;&gt;</span></a>
+            <a class="last" href="getpart.jsp?partof=<%=partof%>&thispage=<%=lastpage%>" target="_self"><span>尾页</span></a>
+        </li>
+        <li class="page_jump">
+            <span class="pages">页码&nbsp;<em class="curr_page"><%=thispage+1%></em>/<em class="all_pages"><%=lastpage+1%></em></span>
+            <form action="getpart.jsp?partof=<%=partof%>">
+                <span><input class="pageNum" type="text" name="thispage" id="thispage"><input type="hidden" class="currPageURL" value=""></span>
+                <span><input class="pagingJump" type="submit" value="跳转"></span>
+            </form>
+
+        </li>
+    </ul>
+</div>
 </body>
 </html>

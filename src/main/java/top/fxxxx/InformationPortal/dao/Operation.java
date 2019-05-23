@@ -207,7 +207,6 @@ public class Operation {
                 title = rs.getString("title");
                 author = Long.valueOf(rs.getString("author"));
                 mydate = Long.valueOf(rs.getString("mydate"));
-                System.out.println(mydate);
                 partof = rs.getString("partof");
                 ans.add(new Article(title, author, "", mydate, partof, id));
             }
@@ -218,7 +217,9 @@ public class Operation {
         return ans;
     }
 
-    public static List<Article> getArticlePartof(String partof, int limitx, int limity) {
+    public static List<Article> getArticlePartof(String partof, int begin, int limit) {
+        int num=getArticlePartofNum(partof);
+        if(begin+limit>num)limit=num-begin;
         List<Article> ans = new ArrayList<>();
         Connection conn = DataInformation.getConn();
         String sql = "select * from article where partof = ? order by mydate desc limit ?,?";
@@ -230,15 +231,15 @@ public class Operation {
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, partof);
-            pstmt.setString(2, limitx + "");
-            pstmt.setString(3, limity + "");
+            pstmt.setInt(2, begin );
+            pstmt.setInt(3, limit );
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
                 author = Long.valueOf(rs.getString("author"));
                 mydate = Long.valueOf(rs.getString("mydate"));
-                System.out.println(mydate);
                 partof = rs.getString("partof");
+                id = Long.valueOf(rs.getString("id"));
                 ans.add(new Article(title, author, "", mydate, partof, id));
             }
         } catch (SQLException e) {
