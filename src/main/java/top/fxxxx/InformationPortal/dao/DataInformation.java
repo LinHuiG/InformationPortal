@@ -1,15 +1,15 @@
 package top.fxxxx.InformationPortal.dao;
 
+import org.dom4j.Element;
+import top.fxxxx.InformationPortal.Util.ConfigProvider;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 class DataInformation {
-    public static String driver = "com.mysql.cj.jdbc.Driver";
-    public static String url = "jdbc:mysql://localhost:3306/testInformationPortal?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true";
-    private static String username = "root";
-    private static String password = "123456";
+    private static Connection conn = null;
     public static void init()
     {
         int i=creatAccount();
@@ -25,20 +25,31 @@ class DataInformation {
             return;
         }
     }
-    protected static Connection getConn() {
-
-        Connection conn = null;
+    public static Connection getConn(){
         try {
-            Class.forName(DataInformation.driver); //classLoader,加载对应驱动
-            conn = (Connection) DriverManager.getConnection(DataInformation.url, DataInformation.username, DataInformation.password);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-
-        } catch (SQLException e) {
+            if(conn==null||conn.isClosed()){
+                synchronized (DataInformation.class){
+                    if(conn==null||conn.isClosed()){
+                        conn=createConnection();
+                    }
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return conn;
     }
+    private static Connection createConnection() throws Exception {
+        String DB_URL,USER,PASS;
+        Element sql= ConfigProvider.getConfig("SQL");
+        // 注册 JDBC 驱动
+        Class.forName(sql.elementText("JDBC_DRIVER"));
+        DB_URL=sql.elementText("url");
+        USER=sql.elementText("username");
+        PASS=sql.elementText("password");
+        return DriverManager.getConnection(DB_URL,USER,PASS);
+    }
+
     static int creatAccount()
     {
         String sql= "CREATE TABLE IF NOT EXISTS account(\n" +
