@@ -9,32 +9,39 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="home.css">
 </head>
 <body>
     <table width="1002" align="center">
-        <tr width="100%" height="100">
+        <tr >
             <td width="100%" align="center">
                 <img align="center" src="http://hhic.hhu.edu.cn/_upload/tpl/00/a3/163/template163/images/hhic-banner1.jpg">
             </td>
         </tr>
         <tr>
             <td><table width="100%"><tr>
-                <td width="20%" bgcolor="black" align="center" border="1" style="border-color:white">
-                    <a style="font-family:arial;color:white;font-size:20px;">首页</a>
+                <td class="title01">
+                    <a >首页</a>
                 </td>
-                <td width="20%" bgcolor="black" align="center" border="1" style="border-color:white">
-                    <a>首页</a>
+                <td class="title01">
+                    <a>中心概况</a>
                 </td>
-                <td width="20%" bgcolor="black" align="center" border="1" style="border-color:white">
-                    <a>首页</a>
+                <td class="title01">
+                    <a>中心管理</a>
                 </td>
-                <td width="20%" bgcolor="black" align="center" border="1" style="border-color:white">
-                    <a>首页</a>
+                <td class="title01">
+                    <a>通讯公告</a>
                 </td>
-                <td width="20%" bgcolor="black" align="center" border="1" style="border-color:white">
+                <td class="title01">
                     <a>首页</a>
                 </td>
             </tr></table></td>
+        </tr>
+        <tr>
+            <td width="100%" height=800px>
+                <jsp:include page="mainpage.jsp"/>
+
+            </td>
         </tr>
     </table>
 </body>
