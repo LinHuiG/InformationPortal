@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 class DataInformation {
     private static Connection conn = null;
+
     public static void init()
     {
         int i=creatAccount();
@@ -60,7 +61,7 @@ class DataInformation {
                 "   email VARCHAR(40),\n" +
                 "   info VARCHAR(40),\n"+
                 "   status VARCHAR(40),\n" +
-                "   PRIMARY KEY ( id )\n" +
+                "   PRIMARY KEY ( name )\n" +
                 ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         Connection conn = DataInformation.getConn();
         int i = -1;
