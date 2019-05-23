@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Operation {
 
+
     public static int insertAccount(Account account) {
         Connection conn = DataInformation.getConn();
         int i = 0;
@@ -22,7 +23,7 @@ public class Operation {
             pstmt.setString(7,account.getStatus());
             i = pstmt.executeUpdate();
             pstmt.close();
-            conn.close();
+             
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,7 +44,7 @@ public class Operation {
             pstmt.setString(6,article.getId()+"");
             i = pstmt.executeUpdate();
             pstmt.close();
-            conn.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,7 +67,7 @@ public class Operation {
             i = pstmt.executeUpdate();
             System.out.println("resutl: " + i);
             pstmt.close();
-            conn.close();
+             
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -87,7 +88,7 @@ public class Operation {
             pstmt.setString(6,article.getId()+"");
             i = pstmt.executeUpdate();
             pstmt.close();
-            conn.close();
+             
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -158,7 +159,7 @@ public class Operation {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             i = pstmt.executeUpdate();
             pstmt.close();
-            conn.close();
+             
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -173,7 +174,7 @@ public class Operation {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             i = pstmt.executeUpdate();
             pstmt.close();
-            conn.close();
+             
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -206,6 +207,37 @@ public class Operation {
 
         return ans;
     }
+
+    public static List<Article> getArticlePartof(String partof,int limitx,int limity) {
+        List<Article> ans=new ArrayList<>();
+        Connection conn =DataInformation.getConn();
+        String sql = "select * from article where partof = ? order by mydate desc limit ?,?";
+        PreparedStatement pstmt;
+        String title="";
+        long author=0;
+        long mydate=0;
+        long id=0;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, partof);
+            pstmt.setString(2, limitx+"");
+            pstmt.setString(3, limity+"");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                title=rs.getString("title");
+                author=Long.valueOf(rs.getString("author"));
+                mydate=Long.valueOf(rs.getString("mydate"));
+                System.out.println(mydate);
+                partof=rs.getString("partof");
+                ans.add(new Article(title,author,"",mydate,partof,id));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
 /*
         getAll();
