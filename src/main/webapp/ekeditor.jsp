@@ -6,8 +6,11 @@
     <script type="text/javascript"src="ckeditor/ckeditor.js"></script>
     <form method="post" action="get.jsp" >
         <h2>标题:<input type="text" id="title1" name="title1" style="width:800px;height:35px"></h2>
+        <p><input type="radio" name="partof" value="pat" /> pat</p>
+        <p><input type="radio" name="partof" value="Car" checked="checked" />car</p>
+        <p><input type="radio" name="partof" value="pat2" checked="checked" /> pat2</p>
     <textarea name="editor1" id="editor1" rows="10" cols="80">
-                阿萨德
+
     </textarea>
         <input type="submit" onclick="">
         <script>

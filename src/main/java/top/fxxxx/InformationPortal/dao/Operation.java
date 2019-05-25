@@ -15,9 +15,9 @@ public class Operation {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, account.getName());
-            pstmt.setString(2, account.getId() + "");
+            pstmt.setLong(2, account.getId() );
             pstmt.setString(3, account.getPassword());
-            pstmt.setString(4, account.getPermissions() + "");
+            pstmt.setLong(4, account.getPermissions() );
             pstmt.setString(5, account.getEmail());
             pstmt.setString(6, account.getInfo());
             pstmt.setString(7, account.getStatus());
@@ -38,11 +38,11 @@ public class Operation {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
-            pstmt.setString(2, article.getAuthor() + "");
+            pstmt.setLong(2, article.getAuthor() );
             pstmt.setString(3, article.getContent());
-            pstmt.setString(4, article.getMydate() + "");
+            pstmt.setLong(4, article.getMydate() );
             pstmt.setString(5, article.getPartof());
-            pstmt.setString(6, article.getId() + "");
+            pstmt.setLong(6, article.getId() );
             i = pstmt.executeUpdate();
             pstmt.close();
 
@@ -55,17 +55,17 @@ public class Operation {
     public static int updateAccount(Account account) {
         Connection conn = DataInformation.getConn();
         int i = 0;
-        String sql = "update account set name = ? , password = ?,permissions = ?,email = ? ,info = ? ,status = ? where id= ? ";
+        String sql = "update account set name = ? , password = ?,permissions = ?,email = ? ,info = ? ,status = ? where name= ? ";
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, account.getName());
             pstmt.setString(2, account.getPassword());
-            pstmt.setString(3, account.getPermissions() + "");
+            pstmt.setLong(3, account.getPermissions() );
             pstmt.setString(4, account.getEmail());
             pstmt.setString(5, account.getInfo());
             pstmt.setString(6, account.getStatus());
-            pstmt.setString(7, account.getId() + "");
+            pstmt.setString(7, account.getName() );
             i = pstmt.executeUpdate();
             System.out.println("resutl: " + i);
             pstmt.close();
@@ -84,11 +84,11 @@ public class Operation {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
-            pstmt.setString(2, article.getAuthor() + "");
+            pstmt.setLong(2, article.getAuthor() );
             pstmt.setString(3, article.getContent());
-            pstmt.setString(4, article.getMydate() + "");
+            pstmt.setLong(4, article.getMydate() );
             pstmt.setString(5, article.getPartof());
-            pstmt.setString(6, article.getId() + "");
+            pstmt.setLong(6, article.getId());
             i = pstmt.executeUpdate();
             pstmt.close();
 
@@ -113,7 +113,7 @@ public class Operation {
             pstmt.setString(1, name);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                id = Long.valueOf(rs.getString("id"));
+                id = rs.getLong("id");
                 password = rs.getString("password");
                 permissions = Integer.valueOf(rs.getString("permissions"));
                 email = rs.getString("email");
@@ -139,12 +139,12 @@ public class Operation {
         String partof = "";
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
-            pstmt.setString(1, id + "");
+            pstmt.setLong(1, id );
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
-                author = Long.valueOf(rs.getString("author"));
-                mydate = Long.valueOf(rs.getString("mydate"));
+                author = rs.getLong("author");
+                mydate = rs.getLong("mydate");
                 content = rs.getString("content");
                 partof = rs.getString("partof");
             }
@@ -180,7 +180,7 @@ public class Operation {
         PreparedStatement pstmt;
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
-            pstmt.setString(1, id+"");
+            pstmt.setLong(1, id);
             i = pstmt.executeUpdate();
             pstmt.close();
 
@@ -205,8 +205,8 @@ public class Operation {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
-                author = Long.valueOf(rs.getString("author"));
-                mydate = Long.valueOf(rs.getString("mydate"));
+                author = rs.getLong("author");
+                mydate = rs.getLong("mydate");
                 partof = rs.getString("partof");
                 ans.add(new Article(title, author, "", mydate, partof, id));
             }
@@ -236,10 +236,10 @@ public class Operation {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
-                author = Long.valueOf(rs.getString("author"));
-                mydate = Long.valueOf(rs.getString("mydate"));
+                author = rs.getLong("author");
+                mydate = rs.getLong("mydate");
                 partof = rs.getString("partof");
-                id = Long.valueOf(rs.getString("id"));
+                id = rs.getLong("id");
                 ans.add(new Article(title, author, "", mydate, partof, id));
             }
         } catch (SQLException e) {

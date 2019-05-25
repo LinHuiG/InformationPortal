@@ -31,7 +31,7 @@
     }
 %>
 <span style="color: red; ">${requestScope.message}</span>
-<form action="./LoginServlet" method="post">
+<form action="LoginServlet" method="post">
     Account:<input type="text" name="Account" value="<%= username%>"><span
         style="color: red; ">${requestScope.error}</span>
     <br>

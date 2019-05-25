@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-class DataInformation {
+public class DataInformation {
     private static Connection conn = null;
 
     public static void init()
@@ -55,9 +55,9 @@ class DataInformation {
     {
         String sql= "CREATE TABLE IF NOT EXISTS account(\n" +
                 "   name VARCHAR(100),\n" +
-                "   id VARCHAR(100) NOT NULL,\n" +
+                "   id BIGINT NOT NULL,\n" +
                 "   password VARCHAR(100) NOT NULL,\n" +
-                "   permissions VARCHAR(1000),\n" +
+                "   permissions BIGINT ,\n" +
                 "   email VARCHAR(40),\n" +
                 "   info VARCHAR(40),\n"+
                 "   status VARCHAR(40),\n" +
@@ -81,11 +81,11 @@ class DataInformation {
     {
         String sql= "CREATE TABLE IF NOT EXISTS article(\n" +
                 "   title VARCHAR(100),\n" +
-                "   author VARCHAR(100) NOT NULL,\n" +
+                "   author BIGINT NOT NULL,\n" +
                 "   partof VARCHAR(100) NOT NULL,\n" +
-                "   mydate VARCHAR(100) NOT NULL,\n" +
+                "   mydate BIGINT NOT NULL,\n" +
                 "   content LONGTEXT NOT NULL,\n" +
-                "   id VARCHAR(100) NOT NULL,\n" +
+                "   id BIGINT NOT NULL,\n" +
                 "   PRIMARY KEY ( id ),\n" +
                 "   KEY ( mydate )\n" +
                 ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";

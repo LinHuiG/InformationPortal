@@ -1,6 +1,8 @@
 <%@ page import="top.fxxxx.InformationPortal.dao.Operation" %>
 <%@ page import="java.util.List" %>
-<%@ page import="top.fxxxx.InformationPortal.dao.Article" %><%--
+<%@ page import="top.fxxxx.InformationPortal.dao.Article" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: 15433
   Date: 2019/5/23
@@ -11,7 +13,6 @@
 <html>
 <head>
     <title>Title</title>
-    <link type="text/css" href="style.css" rel="stylesheet">
 </head>
 <body>
 <%
@@ -32,14 +33,12 @@
         long id = article.getId();
         if (title.length() > 20) title2 = title.substring(0, 17) + "...";
         else title2 = title;
-        out.print("<tbody><tr> \n" +
-                "<td align=\"left\"><a href=\"getarticle.jsp?article_id="+id+"\" target=\"_blank\" title=\"" + title + "\">" + title2 + "</a></td> \n" +
-                " \n" +
-                "<td align=\"left\" width=\"30px\"><div style=\"white-space:nowrap\">"+data+"</div></td> \n" +
-                " \n" +
-                "</tr> \n" +
-                "</tbody>"
-        );
+        String DateTime =  new SimpleDateFormat("yyyy:MM:dd").format(new Date(data));
+        out.print("<a href=\"getarticle.jsp?article_id="+id+"\" target=\"_blank\" title=\"" + title + "\">" + title2 + "  </a>&#160&#160 \n" + DateTime +"<BR>");
+
+
+
+
     }
 %>
 <div id="wp_paging_w3">
