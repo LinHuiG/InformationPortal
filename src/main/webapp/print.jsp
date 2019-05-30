@@ -17,6 +17,7 @@
 
     <%
         String part=request.getParameter("partname");
+        System.out.println(part+"111");
     %>
     <tr>
         <td class="title02">
