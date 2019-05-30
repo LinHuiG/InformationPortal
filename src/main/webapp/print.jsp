@@ -26,6 +26,7 @@
         <%
         int num=Operation.getArticlePartofNum(part);
         num=Math.min(num,6);
+        assert (num!=0);
         for (Article article:Operation.getArticlePartof(part,0,num)){
             %>
         <tr>

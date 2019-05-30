@@ -16,36 +16,36 @@
         <tr>
             <td class="huafeng">
                 <jsp:include page="print.jsp">
-                    <jsp:param name="partname" value="part1"/>
+                    <jsp:param name="partname" value="成果展示"/>
                 </jsp:include>
             </td>
             <td class="huafeng">
                 <jsp:include page="print.jsp">
-                    <jsp:param name="partname" value="part1"/>
-                </jsp:include>
-            </td>
-        </tr>
-        <tr>
-            <td class="huafeng">
-                <jsp:include page="print.jsp">
-                    <jsp:param name="partname" value="part1"/>
-                </jsp:include>
-            </td>
-            <td class="huafeng">
-                <jsp:include page="print.jsp">
-                    <jsp:param name="partname" value="part1"/>
+                    <jsp:param name="partname" value="中心概况"/>
                 </jsp:include>
             </td>
         </tr>
         <tr>
             <td class="huafeng">
                 <jsp:include page="print.jsp">
-                    <jsp:param name="partname" value="part1"/>
+                    <jsp:param name="partname" value="实验教学"/>
                 </jsp:include>
             </td>
             <td class="huafeng">
                 <jsp:include page="print.jsp">
-                    <jsp:param name="partname" value="part1"/>
+                    <jsp:param name="partname" value="实验队伍"/>
+                </jsp:include>
+            </td>
+        </tr>
+        <tr>
+            <td class="huafeng">
+                <jsp:include page="print.jsp">
+                    <jsp:param name="partname" value="管理模式"/>
+                </jsp:include>
+            </td>
+            <td class="huafeng">
+                <jsp:include page="print.jsp">
+                    <jsp:param name="partname" value="设备与环境"/>
                 </jsp:include>
             </td>
         </tr>

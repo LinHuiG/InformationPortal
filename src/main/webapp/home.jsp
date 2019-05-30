@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="home.css">
 </head>
 <body>
+
     <table width="1002" align="center">
         <tr >
             <td width="100%" align="center">
@@ -21,26 +22,46 @@
         <tr>
             <td><table width="100%"><tr>
                 <td class="title01">
-                    <a >首页</a>
+                    <a href="home.jsp?partof=首页">首页</a>
                 </td>
                 <td class="title01">
-                    <a>中心概况</a>
+                    <a href="home.jsp?partof=中心概况">中心概况</a>
                 </td>
                 <td class="title01">
-                    <a>中心管理</a>
+                    <a href="home.jsp?partof=实验教学">实验教学</a>
                 </td>
                 <td class="title01">
-                    <a>通讯公告</a>
+                    <a href="home.jsp?partof=实验队伍">实验队伍</a>
                 </td>
                 <td class="title01">
-                    <a>首页</a>
+                    <a href="home.jsp?partof=管理模式">管理模式</a>
+                </td>
+                <td class="title01">
+                    <a href="home.jsp?partof=设备与环境">设备与环境</a>
+                </td>
+                <td class="title01">
+                    <a href="home.jsp?partof=成果展示">成功展示</a>
                 </td>
             </tr></table></td>
         </tr>
         <tr>
             <td width="100%" height=800px>
+                <%
+                    if(request.getParameter("partof")==null||"首页".equals(request.getParameter("partof"))){
+                %>
                 <jsp:include page="mainpage.jsp"/>
-
+                <%
+                    }
+                    else {
+                        String part = request.getParameter("partof");
+                        System.out.println(part);
+                        request.setCharacterEncoding("UTF-8");
+                %>
+                <jsp:include page="getpart.jsp">
+                    <jsp:param name="partof" value="<%=part%>"/>
+                    <jsp:param name="thispage" value="0"/>
+                </jsp:include>
+                <%}%>
             </td>
         </tr>
     </table>
