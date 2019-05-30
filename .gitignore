@@ -4,3 +4,8 @@
 .idea/dataSources/
 .idea/workspace.xml
 target/
+.idea/artifacts/
+.idea/compiler.xml
+.idea/misc.xml
+InformationPortal.iml
+/.idea/libraries/lib.xml

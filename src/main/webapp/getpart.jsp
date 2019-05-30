@@ -17,6 +17,7 @@
 <body>
 <div style="align-content: center;width: 100%">
 <%
+
     String partof = request.getParameter("partof");
     System.out.println(partof);
     int thispage = 0;
