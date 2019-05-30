@@ -47,21 +47,22 @@
         <tr>
             <td width="100%" height=800px>
                 <%
+                    request.setCharacterEncoding("UTF-8");
                     if(request.getParameter("partof")==null||"首页".equals(request.getParameter("partof"))){
                 %>
                 <jsp:include page="mainpage.jsp"/>
                 <%
-                    }
-                    else {
-                        String part = request.getParameter("partof");
-                        System.out.println(part);
-                        request.setCharacterEncoding("UTF-8");
+                }
+                else {
+                    request.setCharacterEncoding("UTF-8");
+                    String part = request.getParameter("partof");
+                    System.out.println(part);
                 %>
                 <jsp:include page="getpart.jsp">
                     <jsp:param name="partof" value="<%=part%>"/>
                     <jsp:param name="thispage" value="0"/>
                 </jsp:include>
-                <%}%>
+                <% }%>
             </td>
         </tr>
     </table>

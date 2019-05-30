@@ -12,6 +12,9 @@
     <link rel="stylesheet" type="text/css" href="home.css">
 </head>
 <body>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
     <table class="main"  width="100%" height="100%">
         <tr>
             <td class="huafeng">

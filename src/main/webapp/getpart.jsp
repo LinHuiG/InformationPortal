@@ -26,7 +26,7 @@
     if(lastpage<0)lastpage=0;
     if(thispage<0)thispage=0;
     if(thispage>lastpage)thispage=lastpage;
-    List<Article> articles = Operation.getArticlePartof(partof, thispage * 15, thispage * 15+ 15);
+    List<Article> articles = Operation.getArticlePartof(partof,thispage * 15,thispage * 15+ 15);
     for (Article article : articles) {
         String title = article.getTitle();
         String title2;
@@ -35,11 +35,8 @@
         if (title.length() > 20) title2 = title.substring(0, 17) + "...";
         else title2 = title;
         String DateTime =  new SimpleDateFormat("yyyy:MM:dd").format(new Date(data));
-        out.print("<a href=\"getarticle.jsp?article_id="+id+"\" target=\"_blank\" title=\"" + title + "\">" + title2 + "  </a>&#160&#160 \n" + DateTime +"<BR>");
-
-
-
-
+        out.print("<a href=\"getarticle.jsp?article_id="+id+"\" target=\"_blank\" title=\"" + title + "\">" + title2 + "  </a>&#160&#160 \n" + DateTime +"<BR" +
+                ">");
     }
 %>
 <div id="wp_paging_w3">
