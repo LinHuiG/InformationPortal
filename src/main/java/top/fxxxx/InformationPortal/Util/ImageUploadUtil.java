@@ -113,6 +113,12 @@ public class ImageUploadUtil {
                             // 处理不在表单中的字段
                             if (!item.isFormField()) {
                                 String fileName = new File(item.getName()).getName();
+                                Long time=new Date().getTime();
+                                System.out.println(time);
+                                int cd = fileName.lastIndexOf(".");
+                                fileName =time+ fileName.substring(cd);
+
+                                System.out.println(fileName);
                                 String filePath = uploadPath + File.separator + fileName;
                                 File storeFile = new File(filePath);
                                 ans=fileName;

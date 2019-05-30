@@ -53,7 +53,7 @@
             <test class="date"><%=DateTime%></test>
         </div>
     </div>
-    <div style="margin: 50px">
+    <div style="margin: 0px">
         <%=article.getContent()%>
     </div>
 </div>

@@ -17,14 +17,13 @@
 <body>
 <%
     Account account= (Account) session.getAttribute("Account");
+    request.setCharacterEncoding("UTF-8");
     if(true)
     {
 
     }
     String title=request.getParameter("title1");
-    title=new String(title.getBytes("iso-8859-1"),"utf-8");
     String content=request.getParameter("editor1");
-    content=new String(content.getBytes("iso-8859-1"),"utf-8");
     long date=new Date().getTime();
     String author_name=account.getName();
     String partof=request.getParameter("partof");
