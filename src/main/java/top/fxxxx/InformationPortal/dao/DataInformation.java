@@ -81,7 +81,7 @@ public class DataInformation {
     {
         String sql= "CREATE TABLE IF NOT EXISTS article(\n" +
                 "   title VARCHAR(100),\n" +
-                "   author BIGINT NOT NULL,\n" +
+                "   author VARCHAR(100) NOT NULL,\n" +
                 "   partof VARCHAR(100) NOT NULL,\n" +
                 "   mydate BIGINT NOT NULL,\n" +
                 "   content LONGTEXT NOT NULL,\n" +

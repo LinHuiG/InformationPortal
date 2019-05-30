@@ -38,7 +38,7 @@ public class Operation {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
-            pstmt.setLong(2, article.getAuthor() );
+            pstmt.setString(2, article.getAuthor() );
             pstmt.setString(3, article.getContent());
             pstmt.setLong(4, article.getMydate() );
             pstmt.setString(5, article.getPartof());
@@ -84,7 +84,7 @@ public class Operation {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
-            pstmt.setLong(2, article.getAuthor() );
+            pstmt.setString(2, article.getAuthor() );
             pstmt.setString(3, article.getContent());
             pstmt.setLong(4, article.getMydate() );
             pstmt.setString(5, article.getPartof());
@@ -133,7 +133,7 @@ public class Operation {
         String sql = "select * from article where id = ?";
         PreparedStatement pstmt;
         String title = "";
-        long author = 0;
+        String author = "";
         String content = "";
         long mydate = 0;
         String partof = "";
@@ -143,7 +143,7 @@ public class Operation {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
-                author = rs.getLong("author");
+                author = rs.getString("author");
                 mydate = rs.getLong("mydate");
                 content = rs.getString("content");
                 partof = rs.getString("partof");
@@ -196,7 +196,7 @@ public class Operation {
         String sql = "select * from article where partof = ? order by mydate desc limit 6";
         PreparedStatement pstmt;
         String title = "";
-        long author = 0;
+        String author = "";
         long mydate = 0;
         long id = 0;
         try {
@@ -205,7 +205,7 @@ public class Operation {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
-                author = rs.getLong("author");
+                author = rs.getString("author");
                 mydate = rs.getLong("mydate");
                 partof = rs.getString("partof");
                 ans.add(new Article(title, author, "", mydate, partof, id));
@@ -225,7 +225,7 @@ public class Operation {
         String sql = "select * from article where partof = ? order by mydate desc limit ?,?";
         PreparedStatement pstmt;
         String title = "";
-        long author = 0;
+        String author = "";
         long mydate = 0;
         long id = 0;
         try {
@@ -236,7 +236,7 @@ public class Operation {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
-                author = rs.getLong("author");
+                author = rs.getString("author");
                 mydate = rs.getLong("mydate");
                 partof = rs.getString("partof");
                 id = rs.getLong("id");

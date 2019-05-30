@@ -20,7 +20,7 @@
 <%
     }else{
         Account acc=(Account)request.getSession().getAttribute("Account");
-        if((acc.getPermissions()&1)==0){
+        if((acc.getPermissions()&1L)==0){
 %>
 <a href="index.jsp">权限不足！</a>
 <%
