@@ -40,8 +40,11 @@ body
 }
 .huafeng
 {
-    height: 20%;
+    height: 30%;
     width: 50%;
+    background-color: white;
+    border-width: 1px;
+    border-color: black;
     text-align: center;
     align-content: center;
 }
@@ -49,22 +52,24 @@ body
 {
     width: 40%;
     height: 40%;
-    background-color:#3D3D3D;
+    background-color:white;
+    border-width: 1px;
     border-left-width:10px;
     border-right-width:10px;
     border-bottom-width:10px;
     margin-left: 20%;
-    border-color: white;
+    border-color: black;
     align-content: center;
     text-align: center;
     font-size:15px;
-    color: white;
+    color: black;
     border-radius:10px;
 }
 .main
 {
     width: 100%;
-    background-color:#45c9dd;
+    //background-color:#45c9dd;
+    background-color: white;
     border-left-width:50px;
     border-right-width:50px;
     border-bottom-width:50px;
@@ -73,4 +78,14 @@ body
     font-size:15px;
     color: white;
 
+}
+a {
+    color: white;
+}
+.atitle
+{
+    
+}
+.enbed{
+    border-radius: 10px;
 }

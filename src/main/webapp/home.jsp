@@ -45,7 +45,7 @@
             </tr></table></td>
         </tr>
         <tr>
-            <td width="100%" height=800px>
+            <td width="100%" height=800px class="enbed">
                 <%
                     request.setCharacterEncoding("UTF-8");
                     if(request.getParameter("partof")==null||"首页".equals(request.getParameter("partof"))){
