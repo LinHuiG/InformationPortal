@@ -1,6 +1,8 @@
 <%@ page import="top.fxxxx.InformationPortal.dao.Operation" %>
 <%@ page import="top.fxxxx.InformationPortal.dao.Article" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: WZL
   Date: 2019/5/23
@@ -31,11 +33,22 @@
         for (Article article:Operation.getArticlePartof(part,0,num)){
             %>
         <tr>
-            <td class="articlename">
-                <%=article.getTitle()%>
+            <td class="title03">
+                <text class="articletitle" ><a href="home.jsp?article_id=<%=article.getId()%>" style="color: #000;"><%=article.getTitle()%></a></text>
+                <text class="date"><%=new SimpleDateFormat("yyyy-MM-dd").format(new Date(article.getMydate()))%></text>
             </td>
         </tr>
         <%
+        }
+        while (num<6){
+        %>
+        <tr>
+            <td class="title03">
+                <br>
+            </td>
+        </tr>
+        <%
+            num++;
         }
     %>
     </table>

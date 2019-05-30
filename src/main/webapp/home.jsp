@@ -45,10 +45,19 @@
             </tr></table></td>
         </tr>
         <tr>
-            <td width="100%" height=800px class="enbed">
+            <td width="100%" height="100%" class="enbed">
                 <%
                     request.setCharacterEncoding("UTF-8");
-                    if(request.getParameter("partof")==null||"首页".equals(request.getParameter("partof"))){
+                    long article_id=-1;
+                    if (request.getParameter("article_id")!=null&&!request.getParameter("article_id").equals("")){
+                        article_id=Long.valueOf(request.getParameter("article_id"));
+                %>
+                    <jsp:include page="getarticle.jsp">
+                        <jsp:param name="article_id" value="<%=article_id%>" />
+                    </jsp:include>
+                <%
+                    }
+                    else if(request.getParameter("partof")==null||"首页".equals(request.getParameter("partof"))){
                 %>
                 <jsp:include page="mainpage.jsp"/>
                 <%
@@ -56,7 +65,6 @@
                 else {
                     request.setCharacterEncoding("UTF-8");
                     String part = request.getParameter("partof");
-                    System.out.println(part);
                 %>
                 <jsp:include page="getpart.jsp">
                     <jsp:param name="partof" value="<%=part%>"/>
