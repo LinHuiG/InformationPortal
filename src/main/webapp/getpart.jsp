@@ -15,6 +15,7 @@
     <title>Title</title>
 </head>
 <body>
+<div style="align-content: center;width: 100%">
 <%
     String partof = request.getParameter("partof");
     System.out.println(partof);
@@ -29,14 +30,16 @@
     List<Article> articles = Operation.getArticlePartof(partof,thispage * 15,thispage * 15+ 15);
     for (Article article : articles) {
         String title = article.getTitle();
-        String title2;
         long data = article.getMydate();
         long id = article.getId();
-        if (title.length() > 20) title2 = title.substring(0, 17) + "...";
-        else title2 = title;
         String DateTime =  new SimpleDateFormat("yyyy:MM:dd").format(new Date(data));
-        out.print("<a style=\"color: #000;\" href=\"getarticle.jsp?article_id="+id+"\" target=\"_blank\" title=\"" + title + "\">" + title2 + "  </a>&#160&#160 \n" + DateTime +"<BR" +
-                ">");
+        %>
+<div class="title03" style="width: 80%;align-content: center;margin: 0 auto">
+    <a class="articletitle" style="color: #000;" href="home.jsp?article_id=<%=id%> " title="<%=title%>"><%=title%></a>
+    <test class="date"><%=DateTime%></test>
+</div>
+<%
+
     }
 %>
 <div >
@@ -61,6 +64,7 @@
 
         </li>
     </ul>
+</div>
 </div>
 </body>
 </html>
