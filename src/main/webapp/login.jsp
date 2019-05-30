@@ -32,12 +32,12 @@
 %>
 <span style="color: red; ">${requestScope.message}</span>
 <form action="LoginServlet" method="post">
-    Account:<input type="text" name="Account" value="<%= username%>"><span
+    Account:<br><input type="text" name="Account" value="<%= username%>"><span
         style="color: red; ">${requestScope.error}</span>
     <br>
-    Password:<input type="password" name="Password">
+    Password:<br><input type="password" name="Password">
     <br>
-    CAPTCHA:<input type="text" name="CAPTCHA">
+    CAPTCHA:<br><input type="text" name="CAPTCHA">
     <img id="verify">
     <input type="button" value="看不清? 换一张。" id="btn"><font color="red">${requestScope.verifyerror}</font>
     <br>

@@ -12,5 +12,6 @@
 </head>
 <body>
     <A href="login.jsp">login</A>
+<a href="manage.jsp">manager</a>
 </body>
 </html>

@@ -22,16 +22,16 @@
 <body onload="initBody()">
 <span style="color: red; ">${requestScope.message}</span>
 <form action="./RegisterServlet" method="post">
-    Account:<input type="text" name="Account" value=""><span
+    Account:<br><input type="text" name="Account" value=""><span
         style="color: red; ">${requestScope.error}</span>
     <br>
-    Email:<input type="text" name="Email" value="">
+    Email:<br><input type="text" name="Email" value="">
     <br>
-    Password:<input type="password" name="Password">
+    Password:<br><input type="password" name="Password">
     <br>
-    Password(comfirm):<input type="password" name="Check">
+    Password(comfirm):<br><input type="password" name="Check">
     <br>
-    CAPTCHA:<input type="text" name="CAPTCHA">
+    CAPTCHA:<br><input type="text" name="CAPTCHA">
     <img id="verify">
     <input type="button" value="看不清? 换一张。" id="btn"><font color="red">${requestScope.verifyerror}</font>
     <br>
