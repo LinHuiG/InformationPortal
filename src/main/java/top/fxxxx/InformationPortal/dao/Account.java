@@ -5,6 +5,7 @@ public class Account
     private String name;
     private long id;
     private String password;
+    //第0位代表是否有后台管理权限
     private int permissions;
     private String email;
     private String info="";

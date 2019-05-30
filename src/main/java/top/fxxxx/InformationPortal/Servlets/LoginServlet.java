@@ -58,6 +58,6 @@ public class LoginServlet extends HttpServlet {
     //校验密码
     private boolean isValid(String acc,String pwd){
         Account ac= Operation.getAccount(acc);
-        return pwd.equals(ac.getPassword());
+        return ac.getId()!=-1&&pwd.equals(ac.getPassword());
     }
 }

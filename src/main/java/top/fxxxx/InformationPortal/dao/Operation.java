@@ -102,7 +102,7 @@ public class Operation {
         Connection conn = DataInformation.getConn();
         String sql = "select * from account where name = ?";
         PreparedStatement pstmt;
-        long id = 0;
+        long id = -1;
         String password = "";
         int permissions = 0;
         String email = "";
