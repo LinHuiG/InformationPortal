@@ -19,9 +19,10 @@
 
     Account account = (Account) session.getAttribute("Account");
     if ((account.getPermissions() & 2) == 0) {
-%>
-<a style="color:black" href="login.jsp">权限不足，请登录管理员账号</a>
-<%
+        out.print("<script type=\"text/javascript\">");
+        out.println("alert('您没有权限');");
+        out.print("window.location.href='login.jsp';");
+        out.print("</script>");
 } else {
 
     request.setCharacterEncoding("UTF-8");

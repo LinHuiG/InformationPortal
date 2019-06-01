@@ -17,7 +17,7 @@
 <table width="1002" align="center">
     <tr>
         <td width="100%" align="center">
-            <div style="background: url(resource/Image/pic_01.jpg) no-repeat ;height: 92px ;width: 100%">
+            <div style="background: url(Image/pic_01.jpg) no-repeat ;height: 92px ;width: 100%">
 
                 <div style="float: right;color: black">
 

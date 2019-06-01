@@ -47,7 +47,7 @@
                         <input type="hidden" name="aim" value="">
                         <input type="submit" value="提交" onclick="
 if(password.value!==check.value){
-    alert('Passwords do not match.');
+    alert('密码不一致');
     return false;
 }">
                     </form>
