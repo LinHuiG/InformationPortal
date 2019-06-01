@@ -37,7 +37,7 @@
             <div style="align-content: center;width: 100%">
 
                 <div style="width: 40%;align-content: center;margin: 50px 10px">
-                    <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+                    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
                     <form method="post" action="addArticle">
                         <h2>标题:<input type="text" id="title1" name="title1"
                                       style="width:800px;height:35px" value="<%=article.getTitle()%>">

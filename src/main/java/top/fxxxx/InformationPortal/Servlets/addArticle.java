@@ -42,11 +42,13 @@ public class addArticle  extends HttpServlet {
         }
         else
         {
+
             article.setTitle(title);
             article.setPartof(partof);
             article.setContent(content);
             date=article.getMydate();
-            Operation.updateArticle(article);
+            if (request.getParameter("sc")!=null&&request.getParameter("sc").equals("1")) Operation.deleteArticle(article.getId());
+            else Operation.updateArticle(article);
         }
         request.getRequestDispatcher("./getarticle.jsp?article_id="+date).forward(request,response);
     }

@@ -27,7 +27,6 @@
                 <%
                     int onepagenum=30;
                     String partof = request.getParameter("partof");
-                    System.out.println(partof);
                     int thispage = 0;
                     if (request.getParameter("thispage") != null && !request.getParameter("thispage").equals(""))
                         thispage = Integer.valueOf(request.getParameter("thispage"));

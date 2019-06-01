@@ -33,7 +33,7 @@
                         Account acc = (Account) request.getSession().getAttribute("Account");
                         if ((acc.getPermissions() & 1) == 0) {
                     %>
-                    <a style="color: black" href="../index.jsp">权限不足！</a>
+                    <a style="color: black" href="index.jsp">权限不足！</a>
                     <%
                     } else {
                     %>
@@ -41,7 +41,7 @@
                         <input type="text" name="acc">
                         <input type="submit" value="三秒钟之内我要这个人的全部信息！" onclick="
     if(acc.value===''){
-        alert('empty account.');
+        alert('用户名不能为空');
     }">
                     </form>
                     <%
@@ -62,10 +62,10 @@
                         权限:<br><input type="number" name="permission" value="<%=res.getPermissions()%>">
                         <br>
                         个人信息:<br><textarea name="profile"
-                                              style="height: 20%;width: 40%;resize: none"><%=res.getInfo()%></textarea>
+                                              style="height: 200px;width: 100%;resize: none"><%=res.getInfo()%></textarea>
                         <br>
                         <input type="hidden" name="aim" value="<%=res.getName()%>">
-                        <input type="submit" value="submit">
+                        <input type="submit" value="确认">
                     </form>
                     <%
                                     }

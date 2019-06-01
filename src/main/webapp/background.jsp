@@ -9,15 +9,15 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../js/home.css">
+    <link rel="stylesheet" type="text/css" href="js/home.css">
 </head>
 <body>
-<script src="../js/jquery-3.1.1.js"></script>
-<script src="../js/ajax1.js"></script>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/ajax1.js"></script>
 <table width="1002" align="center">
     <tr>
         <td width="100%" align="center">
-            <div style="background: url(http://my.hhu.edu.cn/login/images/pic_01.jpg) no-repeat ;height: 92px ;width: 100%">
+            <div style="background: url(resource/Image/pic_01.jpg) no-repeat ;height: 92px ;width: 100%">
 
                 <div style="float: right;color: black">
 
@@ -47,7 +47,7 @@
             <table width="100%">
                 <tr>
                     <td class="title01">
-                        <a href="../index.jsp">首页</a>
+                        <a href="index.jsp">首页</a>
                     </td>
                     <td class="title01">
                         <a href="getpart.jsp?partof=中心概况">中心概况</a>

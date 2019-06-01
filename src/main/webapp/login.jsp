@@ -54,17 +54,17 @@
                         <br>
                         <input type="submit" value="登录" onclick="
     if(Account.value===''){
-    alert('Account shouldn\'t be empty.');
+    alert('用户名不能为空');
     return false;
 }else if(Password.value===''){
-    alert('Password shouldn\'t be empty.');
+    alert('密码不能为空');
     return false;
 }else if(CAPTCHA.value===''){
-    alert('CAPTCHA shouldn\'t be empty.');
+    alert('验证码不能为空');
     return false;
 }">
+                        <input type="button" value="注册" onclick="window.location.href = 'register.jsp'">
                     </form>
-                    <input type="button" value="注册" onclick="window.location.href = 'register.jsp'">
                     <br>
                     <script type="text/javascript">
 
