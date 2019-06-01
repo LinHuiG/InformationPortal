@@ -63,7 +63,6 @@ public class RegisterServlet extends HttpServlet {
         Account ac=new Account(acc,System.currentTimeMillis(),pwd,0,email);
         int res=Operation.insertAccount(ac);
         if(res==1)request.getSession().setAttribute("Account",ac);
-        System.out.println(res);
         return res==1;
     }
 }

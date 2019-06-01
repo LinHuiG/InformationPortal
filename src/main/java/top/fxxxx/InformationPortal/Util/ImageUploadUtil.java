@@ -114,16 +114,13 @@ public class ImageUploadUtil {
                             if (!item.isFormField()) {
                                 String fileName = new File(item.getName()).getName();
                                 Long time=new Date().getTime();
-                                System.out.println(time);
                                 int cd = fileName.lastIndexOf(".");
                                 fileName =time+ fileName.substring(cd);
 
-                                System.out.println(fileName);
                                 String filePath = uploadPath + File.separator + fileName;
                                 File storeFile = new File(filePath);
                                 ans=fileName;
                                 // 在控制台输出文件的上传路径
-                                System.out.println(filePath);
                                 // 保存文件到硬盘
                                 item.write(storeFile);
                                 request.setAttribute("message",
@@ -173,7 +170,6 @@ public class ImageUploadUtil {
                         }
                         // 获得上传路径的绝对路径地址(/upload)-->
                         String realPath = request.getSession().getServletContext().getRealPath("/" + DirectoryName);
-                        System.out.println(realPath);
                         // 如果路径不存在，则创建该路径
                         File realPathDirectory = new File(realPath);
                         if (realPathDirectory == null || !realPathDirectory.exists()) {
@@ -183,7 +179,6 @@ public class ImageUploadUtil {
                         fileName = DateUtil.format(new Date()) + suffix;
                         // 定义上传路径 .../upload/111112323.jpg
                         File uploadFile = new File(realPathDirectory + "\\" + fileName);
-                        System.out.println(uploadFile);
                         file.transferTo(uploadFile);
                     }
                 }
@@ -208,14 +203,13 @@ public class ImageUploadUtil {
     public static void ckeditor(HttpServletRequest request, HttpServletResponse response, String DirectoryName)
             throws IOException {
         String fileName = myupload(request, DirectoryName);
-        System.out.println(fileName);
         // 结合ckeditor功能
         // imageContextPath为图片在服务器地址，如upload/123.jpg,非绝对路径
         String imageContextPath = request.getContextPath() + "/" + DirectoryName + "/" + fileName;
-        System.out.println(imageContextPath);
+        //System.out.println(imageContextPath);
         response.setContentType("text/html;charset=UTF-8");
         String callback = request.getParameter("CKEditorFuncNum");
-        System.out.println(callback);
+        //System.out.println(callback);
         PrintWriter out = response.getWriter();
         out.print("<script type=\"text/javascript\">");
         out.print("window.parent.CKEDITOR.tools.callFunction("

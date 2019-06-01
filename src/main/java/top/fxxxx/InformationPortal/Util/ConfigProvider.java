@@ -66,7 +66,6 @@ public class ConfigProvider {
         String confDir = null;
         confDir = ConfigProvider.class.getResource("/..").getPath()+ File.separator;
 
-        System.out.println(confDir+"Config.xml");
         return new File(confDir+"Config.xml");
     }
 }
