@@ -32,15 +32,16 @@
                 <div style="width: 40%;align-content: center;margin: 50px auto">
 
                     <span style="color: red; ">${requestScope.message}</span>
-                    <form action="./RegisterServlet" method="post">
-                        用户名:<br><input type="text" name="Account" value=""><span
+                    <form action="RegisterServlet" method="post">
+                        用户名:<br><input type="text" name="Account" value="<%=request.getParameter("Account")==null?"":request.getParameter("Account")%>"><span
                             style="color: red; ">${requestScope.error}</span>
                         <br>
-                        电子邮箱:<br><input type="text" name="Email" value="">
+                        电子邮箱:<br><input type="text" name="Email" value="<%=request.getParameter("Email")==null?"":request.getParameter("Email")%>"><span
+                            style="color: red; ">${requestScope.wrongemail}</span>
                         <br>
-                        密码:<br><input type="password" name="Password">
+                        密码:<br><input type="password" name="Password" value="<%=request.getParameter("Password")==null?"":request.getParameter("Password")%>">
                         <br>
-                        确认密码:<br><input type="password" name="Check">
+                        确认密码:<br><input type="password" name="Check" value="<%=request.getParameter("Check")==null?"":request.getParameter("Check")%>">
                         <br>
                         验证码:<br><input type="text" name="CAPTCHA">
                         <img id="verify">

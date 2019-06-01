@@ -8,6 +8,7 @@ public class Operation {
 
 
     public static int insertAccount(Account account) {
+
         Connection conn = DataInformation.getConn();
         int i = 0;
         String sql = "insert into account (name,id,password,permissions,email,info,status) values(?,?,?,?,?,?,?)";

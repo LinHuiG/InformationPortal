@@ -1,5 +1,6 @@
 package top.fxxxx.InformationPortal.Servlets;
 
+import top.fxxxx.InformationPortal.Util.VerificationUtil;
 import top.fxxxx.InformationPortal.dao.Account;
 import top.fxxxx.InformationPortal.dao.Operation;
 
@@ -33,15 +34,22 @@ public class RegisterServlet extends HttpServlet {
             } else if (!captcha.equalsIgnoreCase(check)){
                 request.setAttribute("verifyerror","验证码错误");
             } else {
-                try {
-                    if (addUser(account,email,pwd,request)){
-                        //注册成功
-                        success(request,response);
-                        return;
-                    }else request.setAttribute("error","此用户名已存在");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    request.setAttribute("message","数据库错误");
+                if (email!=null&&!email.equals("")&& !VerificationUtil.isEmail(email))
+                {
+                        request.setAttribute("wrongemail","非法邮箱地址");
+                }
+                else
+                {
+                    try {
+                        if (addUser(account,email,pwd,request)){
+                            //注册成功
+                            success(request,response);
+                            return;
+                        }else request.setAttribute("error","此用户名已存在");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        request.setAttribute("message","数据库错误");
+                    }
                 }
             }
             request.getRequestDispatcher("/register.jsp").forward(request,response);
