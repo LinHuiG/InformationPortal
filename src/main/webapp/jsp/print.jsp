@@ -19,7 +19,6 @@
 
     <%
         String part=request.getParameter("partname");
-        System.out.println(part+"111");
     %>
     <tr>
         <td class="title02">
@@ -34,7 +33,7 @@
             %>
         <tr>
             <td class="title03">
-                <text class="articletitle" ><a href="home.jsp?article_id=<%=article.getId()%>" style="color: #000;"><%=article.getTitle()%></a></text>
+                <text class="articletitle" ><a href="getarticle.jsp?article_id=<%=article.getId()%>" style="color: #000;"><%=article.getTitle()%></a></text>
                 <text class="date"><%=new SimpleDateFormat("yyyy-MM-dd").format(new Date(article.getMydate()))%></text>
             </td>
         </tr>

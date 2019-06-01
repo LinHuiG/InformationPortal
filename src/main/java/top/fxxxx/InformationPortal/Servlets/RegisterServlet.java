@@ -29,19 +29,19 @@ public class RegisterServlet extends HttpServlet {
         check=session==null?null:(String)session.getAttribute("CheckCode");
         synchronized (this) {
             if (hasNull(account, pwd, captcha, check)){
-                request.setAttribute("message","Incomplete parameters!");
+                request.setAttribute("message","参数不完整");
             } else if (!captcha.equalsIgnoreCase(check)){
-                request.setAttribute("verifyerror","Incorrect CAPTCHA!");
+                request.setAttribute("verifyerror","验证码错误");
             } else {
                 try {
-                    if (addUser(account,email,pwd)){
+                    if (addUser(account,email,pwd,request)){
                         //注册成功
                         success(request,response);
                         return;
-                    }else request.setAttribute("error","The account is already taken.");
+                    }else request.setAttribute("error","此用户名已存在");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    request.setAttribute("message","Database error.");
+                    request.setAttribute("message","数据库错误");
                 }
             }
             request.getRequestDispatcher("/register.jsp").forward(request,response);
@@ -59,9 +59,10 @@ public class RegisterServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-    private boolean addUser(String acc,String email,String pwd){
+    private boolean addUser(String acc,String email,String pwd ,HttpServletRequest request){
         Account ac=new Account(acc,System.currentTimeMillis(),pwd,0,email);
         int res=Operation.insertAccount(ac);
+        if(res==1)request.getSession().setAttribute("Account",ac);
         System.out.println(res);
         return res==1;
     }

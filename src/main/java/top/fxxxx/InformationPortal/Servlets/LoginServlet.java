@@ -28,11 +28,11 @@ public class LoginServlet extends HttpServlet {
         captcha=request.getParameter("CAPTCHA");
         check=session==null?null:(String)session.getAttribute("CheckCode");
         if(hasNull(account,pwd,captcha,check)){
-            request.setAttribute("message","Incomplete parameters!");
+            request.setAttribute("message","参数不完整");
         } else if(!captcha.equalsIgnoreCase(check)){
-            request.setAttribute("verifyerror","Incorrect CAPTCHA!");
+            request.setAttribute("verifyerror","验证码错误");
         } else if(!isValid(account,pwd)){
-            request.setAttribute("error","Bad password or account does not exist.");
+            request.setAttribute("error","密码错误或用户名错误");
         }else {
             success(request,response,Operation.getAccount(account));
             return;

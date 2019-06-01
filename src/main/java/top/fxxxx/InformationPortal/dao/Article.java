@@ -17,7 +17,10 @@ public class Article
         this.partof=partof;
         this.mydate=mydate;
     }
-
+    public Article()
+    {
+        title=author=content=partof="";
+    }
     public long getMydate() {
         return mydate;
     }

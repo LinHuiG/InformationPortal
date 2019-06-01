@@ -18,10 +18,7 @@
 <%
     Account account= (Account) session.getAttribute("Account");
     request.setCharacterEncoding("UTF-8");
-    if(true)
-    {
 
-    }
     String title=request.getParameter("title1");
     String content=request.getParameter("editor1");
     long date=new Date().getTime();
