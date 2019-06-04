@@ -49,7 +49,7 @@
                             <option value="实验队伍">实验队伍</option>
                             <option value="管理模式">管理模式</option>
                             <option value="设备与环境">设备与环境</option>
-                            <option value="成功展示">成功展示</option>
+                            <option value="成功展示">成果展示</option>
                         </select></h3>
                         <textarea name="editor1" id="editor1" rows="10" cols="80">
                             <%=article.getContent()%>

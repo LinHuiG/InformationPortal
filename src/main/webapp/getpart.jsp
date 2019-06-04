@@ -25,7 +25,7 @@
             <div style="align-content: center;width: 100%">
 
                 <%
-                    int onepagenum=30;
+                    int onepagenum=25;
                     String partof = request.getParameter("partof");
                     int thispage = 0;
                     if (request.getParameter("thispage") != null && !request.getParameter("thispage").equals(""))

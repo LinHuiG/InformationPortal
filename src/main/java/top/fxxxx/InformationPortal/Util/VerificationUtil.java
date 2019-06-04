@@ -7,7 +7,9 @@ public class VerificationUtil {
 
     public static boolean isEmail(String email)
     {
-        String regex = "[a-zA-Z_]{1,}[0-9]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,3}[a-zA-z\\-]{1,}" ;
+        String regex = "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+
+        if (match(regex,email))System.out.println(email);
         return match( regex ,email );
     }
     private static boolean match( String regex ,String str ){

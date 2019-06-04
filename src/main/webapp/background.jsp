@@ -17,7 +17,7 @@
 <table width="1002" align="center">
     <tr>
         <td width="100%" align="center">
-            <div style="background: url(Image/pic_01.jpg) no-repeat ;height: 92px ;width: 100%">
+            <div style="background: url(Image/pic_01.png) no-repeat ;height: 92px ;width: 100%">
 
                 <div style="float: right;color: black">
 
@@ -65,7 +65,7 @@
                         <a href="getpart.jsp?partof=设备与环境">设备与环境</a>
                     </td>
                     <td class="title01">
-                        <a href="getpart.jsp?partof=成果展示">成功展示</a>
+                        <a href="getpart.jsp?partof=成果展示">成果展示</a>
                     </td>
                 </tr>
             </table>

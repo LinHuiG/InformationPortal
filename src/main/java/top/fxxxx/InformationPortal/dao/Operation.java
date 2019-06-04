@@ -16,9 +16,9 @@ public class Operation {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, account.getName());
-            pstmt.setLong(2, account.getId() );
+            pstmt.setLong(2, account.getId());
             pstmt.setString(3, account.getPassword());
-            pstmt.setLong(4, account.getPermissions() );
+            pstmt.setLong(4, account.getPermissions());
             pstmt.setString(5, account.getEmail());
             pstmt.setString(6, account.getInfo());
             pstmt.setString(7, account.getStatus());
@@ -26,7 +26,7 @@ public class Operation {
             pstmt.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return i;
     }
@@ -39,11 +39,11 @@ public class Operation {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
-            pstmt.setString(2, article.getAuthor() );
+            pstmt.setString(2, article.getAuthor());
             pstmt.setString(3, article.getContent());
-            pstmt.setLong(4, article.getMydate() );
+            pstmt.setLong(4, article.getMydate());
             pstmt.setString(5, article.getPartof());
-            pstmt.setLong(6, article.getId() );
+            pstmt.setLong(6, article.getId());
             i = pstmt.executeUpdate();
             pstmt.close();
 
@@ -62,13 +62,12 @@ public class Operation {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, account.getName());
             pstmt.setString(2, account.getPassword());
-            pstmt.setLong(3, account.getPermissions() );
+            pstmt.setLong(3, account.getPermissions());
             pstmt.setString(4, account.getEmail());
             pstmt.setString(5, account.getInfo());
             pstmt.setString(6, account.getStatus());
-            pstmt.setString(7, account.getName() );
+            pstmt.setString(7, account.getName());
             i = pstmt.executeUpdate();
-            System.out.println("resutl: " + i);
             pstmt.close();
 
         } catch (SQLException e) {
@@ -85,9 +84,9 @@ public class Operation {
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
             pstmt.setString(1, article.getTitle());
-            pstmt.setString(2, article.getAuthor() );
+            pstmt.setString(2, article.getAuthor());
             pstmt.setString(3, article.getContent());
-            pstmt.setLong(4, article.getMydate() );
+            pstmt.setLong(4, article.getMydate());
             pstmt.setString(5, article.getPartof());
             pstmt.setLong(6, article.getId());
             i = pstmt.executeUpdate();
@@ -140,7 +139,7 @@ public class Operation {
         String partof = "";
         try {
             pstmt = (PreparedStatement) conn.prepareStatement(sql);
-            pstmt.setLong(1, id );
+            pstmt.setLong(1, id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
@@ -219,8 +218,8 @@ public class Operation {
     }
 
     public static List<Article> getArticlePartof(String partof, int begin, int limit) {
-        int num=getArticlePartofNum(partof);
-        if(begin+limit>num)limit=num-begin;
+        int num = getArticlePartofNum(partof);
+        if (begin + limit > num) limit = num - begin;
         List<Article> ans = new ArrayList<>();
         Connection conn = DataInformation.getConn();
         String sql = "select * from article where partof = ? order by mydate desc limit ?,?";
@@ -232,8 +231,8 @@ public class Operation {
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, partof);
-            pstmt.setInt(2, begin );
-            pstmt.setInt(3, limit );
+            pstmt.setInt(2, begin);
+            pstmt.setInt(3, limit);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 title = rs.getString("title");
@@ -267,21 +266,5 @@ public class Operation {
         }
 
         return ans;
-    }
-
-    public static void main(String[] args) {
-/*
-        getAll();
-        System.out.println("111");
-        insert(new Student("Achilles男", "Male", "14"));
-        getAll();
-        System.out.println("111");
-        insert(new Student("Bean", "", "7"));
-        update(new Student("Bean", "", "8"));
-        delete("Achilles");
-        getAll();
-        System.out.println("111");
-
-*/
     }
 }

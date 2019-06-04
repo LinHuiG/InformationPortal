@@ -22,7 +22,7 @@
     %>
     <tr>
         <td class="title02">
-            <%=part%>
+            <a style="color: black" href="getpart.jsp?partof=<%=part%>"><%=part%></a>
         </td>
     </tr>
         <%

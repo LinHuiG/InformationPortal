@@ -36,6 +36,7 @@ public class RegisterServlet extends HttpServlet {
             } else {
                 if (email!=null&&!email.equals("")&& !VerificationUtil.isEmail(email))
                 {
+                    System.out.println(email);
                         request.setAttribute("wrongemail","非法邮箱地址");
                 }
                 else
