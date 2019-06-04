@@ -17,7 +17,7 @@
 <html>
 <head>
     <base href="<%=basePath%>">
-    <title>Register</title>
+    <title>河海大学实验中心门户注册</title>
 </head>
 <body onload="initBody()">
 

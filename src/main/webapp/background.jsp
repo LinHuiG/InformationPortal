@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>河海大学实验中心门户</title>
     <link rel="stylesheet" type="text/css" href="js/home.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
             <div style="background: url(Image/pic_01.png) no-repeat ;height: 92px ;width: 100%">
 
                 <div style="float: right;color: black">
-
+                    <br>
                     <%
 
                         request.setCharacterEncoding("UTF-8");
