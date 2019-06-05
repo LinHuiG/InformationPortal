@@ -30,10 +30,15 @@
         num=Math.min(num,6);
         assert (num!=0);
         for (Article article:Operation.getArticlePartof(part,0,num)){
+            String titlecut=article.getTitle();
+            if(titlecut.length()>20)
+            {
+                titlecut=titlecut.substring(0,18)+"...";
+            }
             %>
         <tr>
             <td class="title03">
-                <text class="articletitle" ><a href="getarticle.jsp?article_id=<%=article.getId()%>" style="color: #000;"><%=article.getTitle()%></a></text>
+                <text class="articletitle" ><a href="getarticle.jsp?article_id=<%=article.getId()%>" style="color: #000;"><%=titlecut%></a></text>
                 <text class="date"><%=new SimpleDateFormat("yyyy-MM-dd").format(new Date(article.getMydate()))%></text>
             </td>
         </tr>

@@ -26,12 +26,12 @@
                     <%
 
                         request.setCharacterEncoding("UTF-8");
-                        if(request.getSession(true).getAttribute("Account")==null){
+                        if (request.getSession(true).getAttribute("Account") == null) {
                     %>
                     <a style="color: black" href="login.jsp">请先登录</a>
                     <%
-                    }else{
-                        Account acc=(Account)request.getSession().getAttribute("Account");
+                    } else {
+                        Account acc = (Account) request.getSession().getAttribute("Account");
                     %>
                     <form action="ModifyServlet" method="post">
                         用户名:<br><%=acc.getName()%>
@@ -42,7 +42,8 @@
                         <br>
                         确认密码:<br><input type="password" name="check">
                         <br>
-                        个人信息:<br><textarea name="profile" style="height: 200px;width: 100%;resize: none"><%=acc.getInfo()%></textarea>
+                        个人信息:<br><textarea name="profile"
+                                           style="height: 200px;width: 100%;resize: none"><%=acc.getInfo()%></textarea>
                         <br>
                         <input type="hidden" name="aim" value="">
                         <input type="submit" value="提交" onclick="
@@ -54,19 +55,16 @@ if(password.value!==check.value){
                 </div>
                 <div style="width: 40%;align-content: center;margin: 50px auto">
                     <%
-                            if ((acc.getPermissions() & 1) != 0)
-                            {
-                                %>
-                                    <a style="color: black" href="control.jsp">设置账户</a>
-                                <%
+                        if (acc.getPermissions() >= 1) {
+                    %>
+                    <a style="color: black" href="ekeditor.jsp?gx=1">增加文章</a>
+                    <%
+                        }
+                        if (acc.getPermissions() >= 2) {
+                    %>
+                    <a style="color: black" href="control.jsp">设置账户</a>
+                    <%
                             }
-                            if ((acc.getPermissions() & 2) != 0)
-                            {
-                                %>
-                                    <a style="color: black" href="ekeditor.jsp?gx=1">增加文章</a>
-                                <%
-                            }
-
                         }
                     %>
                 </div>

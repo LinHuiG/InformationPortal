@@ -11,9 +11,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    long id = Long.valueOf(request.getParameter("article_id"));
+    Article article = Operation.getArticle(id);
+    String DateTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date(article.getMydate()));
+    session.setAttribute("Article",article);
+%>
 <html>
 <head>
-    <title>Title</title>
+    <title><%=article.getTitle()%></title>
     <style>
 
         #mtitle {
@@ -37,12 +44,6 @@
     </style>
 </head>
 <body>
-<%
-    long id = Long.valueOf(request.getParameter("article_id"));
-    Article article = Operation.getArticle(id);
-    String DateTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date(article.getMydate()));
-    session.setAttribute("Article",article);
-%>
 
 <jsp:include page="background.jsp">
     <jsp:param name="" value=""></jsp:param>
@@ -59,7 +60,7 @@
                             Account acc=null;
                             if(session.getAttribute("Account")!=null)
                                 acc=(Account) session.getAttribute("Account");
-                            if (acc!=null&&(acc.getPermissions() & 2) != 0)
+                            if (acc!=null&&(acc.getPermissions()>= 1))
                             {
                         %>
                         <a style="color: black" id="mtitle3" href="ekeditor.jsp?gx=0"><%=article.getTitle()%></a>

@@ -47,25 +47,25 @@
             <table width="100%">
                 <tr>
                     <td class="title01">
-                        <a href="index.jsp">首页</a>
+                        <a style="color: whitesmoke" href="index.jsp">首页</a>
                     </td>
                     <td class="title01">
-                        <a href="getpart.jsp?partof=中心概况">中心概况</a>
+                        <a style="color: whitesmoke" href="getpart.jsp?partof=中心概况">中心概况</a>
                     </td>
                     <td class="title01">
-                        <a href="getpart.jsp?partof=实验教学">实验教学</a>
+                        <a style="color: whitesmoke" href="getpart.jsp?partof=实验教学">实验教学</a>
                     </td>
                     <td class="title01">
-                        <a href="getpart.jsp?partof=实验队伍">实验队伍</a>
+                        <a style="color: whitesmoke" href="getpart.jsp?partof=实验队伍">实验队伍</a>
                     </td>
                     <td class="title01">
-                        <a href="getpart.jsp?partof=管理模式">管理模式</a>
+                        <a style="color: whitesmoke" href="getpart.jsp?partof=管理模式">管理模式</a>
                     </td>
                     <td class="title01">
-                        <a href="getpart.jsp?partof=设备与环境">设备与环境</a>
+                        <a style="color: whitesmoke" href="getpart.jsp?partof=设备与环境">设备与环境</a>
                     </td>
                     <td class="title01">
-                        <a href="getpart.jsp?partof=成果展示">成果展示</a>
+                        <a style="color: whitesmoke" href="getpart.jsp?partof=成果展示">成果展示</a>
                     </td>
                 </tr>
             </table>

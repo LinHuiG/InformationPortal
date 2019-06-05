@@ -18,7 +18,7 @@
 } else {
 
     Account account = (Account) session.getAttribute("Account");
-    if ((account.getPermissions() & 2) == 0) {
+    if (account.getPermissions() <1) {
         out.print("<script type=\"text/javascript\">");
         out.println("alert('您没有权限');");
         out.print("window.location.href='login.jsp';");
@@ -39,7 +39,7 @@
 
                 <div style="width: 40%;align-content: center;margin: 50px 10px">
                     <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-                    <form method="post" action="addArticle">
+                    <form method="post" action="">
                         <h2>标题:<input type="text" id="title1" name="title1"
                                       style="width:800px;height:35px" value="<%=article.getTitle()%>">
                         </h2>
@@ -56,7 +56,16 @@
 
     </textarea>
                         <input type="hidden" name="gx" value="<%=gx%>">
-                        <input type="submit" onclick="">
+
+                        <input type="submit" onclick="javascript:this.form.action='addArticle?sc=0';" value="增加文章">
+                        <%
+                            if (gx.equals("0"))
+                            {
+                        %>
+                        <input type="submit" onclick="javascript:this.form.action='addArticle?sc=1';" value="删除文章">
+                        <%
+                            }
+                        %>
                         <script>
                             CKEDITOR.replace('editor1', {
                                 //'kama', 'v2', 'office2003'

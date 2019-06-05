@@ -37,7 +37,7 @@ public class addArticle extends HttpServlet {
             return;
         }
         Account account = (Account) session.getAttribute("Account");
-        if ((account.getPermissions() & 2) == 0)
+        if (account.getPermissions() < 1)
         {
             response.setContentType("text/html;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
@@ -60,14 +60,17 @@ public class addArticle extends HttpServlet {
             Operation.insertArticle(article);
 
         } else {
-
+            if (request.getParameter("sc") != null && request.getParameter("sc").equals("1"))
+            {
+                Operation.deleteArticle(article.getId());
+                request.getRequestDispatcher("./getpart.jsp?partof=" + article.getPartof()).forward(request, response);
+                return;
+            }
             article.setTitle(title);
             article.setPartof(partof);
             article.setContent(content);
             date = article.getMydate();
-            if (request.getParameter("sc") != null && request.getParameter("sc").equals("1"))
-                Operation.deleteArticle(article.getId());
-            else Operation.updateArticle(article);
+            Operation.updateArticle(article);
         }
         request.getRequestDispatcher("./getarticle.jsp?article_id=" + date).forward(request, response);
     }

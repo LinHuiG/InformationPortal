@@ -21,4 +21,14 @@ public class VerificationUtil {
         String regex = "http://(([a-zA-z0-9]|-){1,}\\.){1,}[a-zA-z0-9]{1,}-*" ;
         return match( regex ,str );
     }
+    public static boolean isPower(int holder,int geter)
+    {
+        while ( geter>0)
+        {
+            if(geter%2>holder%2)return false;
+            geter/=2;
+            holder/=2;
+        }
+        return true;
+    }
 }

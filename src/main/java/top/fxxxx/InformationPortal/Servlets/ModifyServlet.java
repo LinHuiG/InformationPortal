@@ -21,50 +21,91 @@ public class ModifyServlet extends HttpServlet {
         String reqUrl = req.getRequestURL().toString();
         String queryString = req.getQueryString(); // d=789
         if (queryString != null) {
-            reqUrl += "?"+queryString;
+            reqUrl += "?" + queryString;
         }
         return reqUrl;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req,resp);
+        doPost(req, resp);
     }
+
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session=request.getSession(false);
-        String email,profile,pwd,aim,permission;
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(false);
+        String email, profile, pwd, aim, permission;
         Account acc;
-        aim=request.getParameter("aim");
-        acc=aim.equals("")?(Account)session.getAttribute("Account"):Operation.getAccount(aim);
-        email=request.getParameter("email");
-        pwd=request.getParameter("password");
-        profile=request.getParameter("profile");
-        permission=request.getParameter("permission");
-        if(pwd!=null&&!pwd.equals(""))acc.setPassword(pwd);
-        if(email!=null&&!email.equals(""))
-        {
-            if( VerificationUtil.isEmail(email)) acc.setEmail(email);
+        aim = request.getParameter("aim");
+        Account holder = (Account) session.getAttribute("Account");
+        acc = aim.equals("") ? (Account) session.getAttribute("Account") : Operation.getAccount(aim);
+        response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        if (acc.getName().equals(holder.getName()) && !aim.equals("")) {
+            out.print("<script type=\"text/javascript\"> ");
+            out.println("alert('不能在此修改自己的信息');");
+            out.println("location.href='manage.jsp';");
+            out.print("</script>");
+            return;
+        }
+        if (!aim.equals("") && holder.getPermissions()< 2) {
+            out.print("<script type=\"text/javascript\"> ");
+            out.println("alert('您没有权限');");
+            out.println("location.href='manage.jsp';");
+            out.print("</script>");
+            return;
+        }
+
+        if (request.getParameter("sc") != null && request.getParameter("sc").equals("1")) {
+            if (holder.getPermissions()>=3)
+            {
+                Operation.deleteAccount(acc.getName());
+                request.getRequestDispatcher("./control.jsp?").forward(request, response);
+            }
             else
             {
-                response.setContentType("text/html;charset=UTF-8");
-                response.setCharacterEncoding("UTF-8");
-                PrintWriter out = response.getWriter();
+                out.print("<script type=\"text/javascript\"> ");
+                out.println("alert('您没有权限删除他人账号');");
+                out.println("location.href='" + (aim.equals("") ? "manage.jsp" : "control.jsp?acc=" + aim) + "';");
+                out.print("</script>");
+
+            }
+            return;
+        }
+        email = request.getParameter("email");
+        pwd = request.getParameter("password");
+        profile = request.getParameter("profile");
+        permission = request.getParameter("permission");
+
+        if (pwd != null && !pwd.equals("")) acc.setPassword(pwd);
+        if (email != null && !email.equals("")) {
+            if (VerificationUtil.isEmail(email)) acc.setEmail(email);
+            else {
                 out.print("<script type=\"text/javascript\"> ");
                 out.println("alert('请输入合法的邮箱地址');");
-                out.println("location.href='"+(aim.equals("")?"manage.jsp":"control.jsp?acc="+aim)+"';");
+                out.println("location.href='" + (aim.equals("") ? "manage.jsp" : "control.jsp?acc=" + aim) + "';");
                 out.print("</script>");
                 return;
             }
         }
-        if(profile!=null&&!profile.equals(""))acc.setInfo(profile);
-        if(permission!=null&&!permission.equals(""))acc.setPermissions(Integer.parseInt(permission));
+        if (profile != null && !profile.equals("")) acc.setInfo(profile);
+        if (permission != null && !permission.equals("")) {
+            if (holder.getPermissions()<3&& Integer.valueOf(permission)!=acc.getPermissions()) {
+                out.print("<script type=\"text/javascript\"> ");
+                out.println("alert('您不能修改他人权限');");
+                out.println("location.href='" + (aim.equals("") ? "manage.jsp" : "control.jsp?acc=" + aim) + "';");
+                out.print("</script>");
+                return;
+            }
+            acc.setPermissions(Integer.parseInt(permission));
+        }
+
         Operation.updateAccount(acc);
         //     out.print("<script>alert('"+error+"'); window.location='index.jsp' </script>");
-        request.getRequestDispatcher("/index.jsp").forward(request,response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
 }

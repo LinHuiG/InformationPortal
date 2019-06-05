@@ -31,7 +31,7 @@
                     <%
                     } else {
                         Account acc = (Account) request.getSession().getAttribute("Account");
-                        if ((acc.getPermissions() & 1) == 0) {
+                        if (acc.getPermissions() <2) {
                     %>
                     <a style="color: black" href="index.jsp">权限不足！</a>
                     <%
@@ -54,7 +54,7 @@
                     <%
                     } else {
                     %>
-                    <form action="ModifyServlet" method="post">
+                    <form action="" method="post">
                         用户名:<br><%=res.getName()%>
                         <br>
                         电子邮箱:<br><input type="text" name="email" value="">
@@ -65,7 +65,14 @@
                                               style="height: 200px;width: 100%;resize: none"><%=res.getInfo()%></textarea>
                         <br>
                         <input type="hidden" name="aim" value="<%=res.getName()%>">
-                        <input type="submit" value="确认">
+                        <input type="submit" value="确认修改" onclick="javascript:this.form.action='ModifyServlet?sc=0'">
+                        <%
+                            if (acc.getPermissions()>=3){
+                        %>
+                        <input type="submit" value="删除账户" onclick="javascript:this.form.action='ModifyServlet?sc=1'">
+                        <%
+                            }
+                        %>
                     </form>
                     <%
                                     }
