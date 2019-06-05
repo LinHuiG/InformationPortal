@@ -36,7 +36,9 @@
                     if (thispage < 0) thispage = 0;
                     if (thispage > lastpage) thispage = lastpage;
                     List<Article> articles = Operation.getArticlePartof(partof, thispage * onepagenum, onepagenum);
+                    int cot=0;
                     for (Article article : articles) {
+                        cot++;
                         String title = article.getTitle();
                         long data = article.getMydate();
                         long id = article.getId();
@@ -50,7 +52,18 @@
                     </test>
                 </div>
                 <%
-
+                    }
+                    while (cot<onepagenum)
+                    {
+                        cot++;
+                %>
+                <div class="title03" style="width: 80%;align-content: center;margin: 0 auto">
+                    <a class="articletitle" style="color: #000;">
+                    </a><br>
+                    <test class="date">
+                    </test>
+                </div>
+                <%
                     }
                 %>
                 <div>

@@ -102,7 +102,6 @@ public class ModifyServlet extends HttpServlet {
             }
             acc.setPermissions(Integer.parseInt(permission));
         }
-
         Operation.updateAccount(acc);
         //     out.print("<script>alert('"+error+"'); window.location='index.jsp' </script>");
         request.getRequestDispatcher("/index.jsp").forward(request, response);

@@ -29,13 +29,15 @@
                     %>
                     <a style="color: black" href="login.jsp">请先登录</a>
                     <%
-                    } else {
+                            return;
+                        }
                         Account acc = (Account) request.getSession().getAttribute("Account");
-                        if (acc.getPermissions() <2) {
+                        if (acc.getPermissions() < 2) {
                     %>
                     <a style="color: black" href="index.jsp">权限不足！</a>
                     <%
-                    } else {
+                            return;
+                        }
                     %>
                     <form action="control.jsp" method="get">
                         <input type="text" name="acc">
@@ -46,40 +48,44 @@
                     </form>
                     <%
                         String aim = request.getParameter("acc");
-                        if (aim != null) {
-                            Account res = Operation.getAccount(aim);
-                            if (res.getId() == -1) {
+                        if (aim == null) return;
+                        Account res = Operation.getAccount(aim);
+                        if (acc.getPermissions() < res.getPermissions()) {
+                    %>
+                    <a style="color: black" href="index.jsp">您无权修改比您权限高的用户！</a>
+                    <%
+                            return;
+                        }
+                        if (res.getId() == -1) {
                     %>
                     查无此人
                     <%
-                    } else {
+                            return;
+                        }
                     %>
                     <form action="" method="post">
                         用户名:<br><%=res.getName()%>
                         <br>
                         电子邮箱:<br><input type="text" name="email" value="">
                         <br>
+
+                        密码:<br><input type="password" name="password" value="<%=res.getPassword()%>">
+                        <br>
                         权限:<br><input type="number" name="permission" value="<%=res.getPermissions()%>">
                         <br>
                         个人信息:<br><textarea name="profile"
-                                              style="height: 200px;width: 100%;resize: none"><%=res.getInfo()%></textarea>
+                                           style="height: 200px;width: 100%;resize: none"><%=res.getInfo()%></textarea>
                         <br>
                         <input type="hidden" name="aim" value="<%=res.getName()%>">
                         <input type="submit" value="确认修改" onclick="javascript:this.form.action='ModifyServlet?sc=0'">
                         <%
-                            if (acc.getPermissions()>=3){
+                            if (acc.getPermissions() >= 3) {
                         %>
                         <input type="submit" value="删除账户" onclick="javascript:this.form.action='ModifyServlet?sc=1'">
                         <%
                             }
                         %>
                     </form>
-                    <%
-                                    }
-                                }
-                            }
-                        }
-                    %>
 
 
                 </div>
