@@ -40,7 +40,7 @@
                     } else {
                         Account acc = (Account) request.getSession().getAttribute("Account");
                     %>
-                    <a style="color: black" href="manage.jsp"  > <%=acc.getName()%></a>
+                    <%=acc.getName()%><a style="color: black" href="manage.jsp"  > 账户管理 </a>
                     <a style="color: black" href="" onclick="logout()">注销</a>
                     <%
                         }

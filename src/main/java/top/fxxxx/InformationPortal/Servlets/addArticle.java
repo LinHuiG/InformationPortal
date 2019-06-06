@@ -54,6 +54,7 @@ public class addArticle extends HttpServlet {
         String partof = request.getParameter("partof");
         String content = request.getParameter("editor1");
         String rootpartof = request.getParameter("rootpartof");
+        if(title==null||title.equals(""))title="无标题";
         long date = new Date().getTime();
         if (gx.equals("1")) {
             article = new Article(title, account.getName(), content, date, partof,rootpartof, date);
@@ -66,7 +67,6 @@ public class addArticle extends HttpServlet {
                 request.getRequestDispatcher("./getpart.jsp?partof=" + article.getPartof()).forward(request, response);
                 return;
             }
-            if(title==null||title.equals(""))title="无标题";
             article.setTitle(title);
             article.setPartof(partof);
             article.setRootpartof(rootpartof);
