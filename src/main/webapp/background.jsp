@@ -58,14 +58,41 @@
                         <a style="color: whitesmoke" href="index.jsp">首页</a>
                     </td>
                     <td class="title01">
-                        <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=中心概况">中心概况</a>
+                        <div class="dropdown">
+                            <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=中心概况">中心概况</a>
+                            <div class="dropdown-content">
+                                <%
+                                    List<String>list=Operation.getPartof("中心概况");
+                                    for(String s:list){
+                                %>
+                                        <a style="color:whitesmoke"  href="getpart.jsp?partof=<%=s%>"><%=s%></a><br>
+                                <%
+                                    }
+                                %>
 
+                            </div>
+                        </div>
                     </td>
                     <td class="title01">
-                        <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=实验教学">实验教学</a>
+                        <div class="dropdown">
+                            <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=实验教学">实验教学</a>
+                            <div class="dropdown-content">
+                                <%
+                                    List<String>list1=Operation.getPartof("实验教学");
+                                    for(String s:list1){
+                                %>
+                                <a style="color:whitesmoke" ><%=s%></a><br>
+                                <%
+                                    }
+                                %>
+
+                            </div>
+                        </div>
                     </td>
                     <td class="title01">
+
                         <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=实验队伍">实验队伍</a>
+
                     </td>
                     <td class="title01">
                         <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=管理模式">管理模式</a>
