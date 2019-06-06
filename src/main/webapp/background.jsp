@@ -21,6 +21,7 @@
 <body style="background-image: url(Image/bg.jpg) ; background-repeat: repeat-x; ">
 <script src="js/jquery-3.1.1.js"></script>
 <script src="js/ajax1.js"></script>
+
 <table style="background: url(Image/head.jpg) no-repeat; height: 125px" width="1002"  align="center" >
 
     <tr>
