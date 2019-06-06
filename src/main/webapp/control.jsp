@@ -41,7 +41,7 @@
                     %>
                     <form action="control.jsp" method="get">
                         <input type="text" name="acc">
-                        <input type="submit" value="三秒钟之内我要这个人的全部信息！" onclick="
+                        <input type="submit" value="查找用户" onclick="
     if(acc.value===''){
         alert('用户名不能为空');
     }">

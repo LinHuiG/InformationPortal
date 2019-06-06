@@ -100,7 +100,7 @@ public class ModifyServlet extends HttpServlet {
                 out.print("</script>");
                 return;
             }
-            acc.setPermissions(Integer.parseInt(permission));
+            acc.setPermissions(Math.min(Integer.parseInt(permission),3));
         }
         Operation.updateAccount(acc);
         //     out.print("<script>alert('"+error+"'); window.location='index.jsp' </script>");

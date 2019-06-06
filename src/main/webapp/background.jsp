@@ -12,17 +12,22 @@
 <head>
     <title>河海大学实验中心门户</title>
     <link rel="stylesheet" type="text/css" href="js/home.css">
+    <style>
+        table{
+            background-color: rgba(247,251,255,.8);
+        }
+    </style>
 </head>
-<body>
+<body style="background-image: url(Image/bg.jpg) ; background-repeat: repeat-x; ">
 <script src="js/jquery-3.1.1.js"></script>
 <script src="js/ajax1.js"></script>
-<table width="1002" align="center">
+<table style="background: url(Image/head.jpg) no-repeat; height: 125px" width="1002"  align="center" >
+
     <tr>
         <td width="100%" align="center">
-            <div style="background: url(Image/pic_01.png) no-repeat ;height: 92px ;width: 100%">
+            <div style="height: 115px ;width: 100%">
 
                 <div style="float: right;color: black">
-                    <br>
                     <%
 
                         request.setCharacterEncoding("UTF-8");
@@ -75,7 +80,6 @@
         </td>
     </tr>
 </table>
-<br>
 </body>
 </html>
 
