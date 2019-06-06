@@ -31,6 +31,7 @@ public class DataInformation {
             System.out.println("创建Partof表失败");
             return;
         }
+        Operation.insertAccount(new Account("root",0,"123456",100,""));
     }
     public static Connection getConn(){
         try {
