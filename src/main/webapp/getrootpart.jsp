@@ -30,7 +30,7 @@
 
                 <div style="float: left;width: 20%">
 
-                    <text style="font-size: 30px"><%=rootpartof%></text>
+                    <text style="font-size: 30px" class="title02"><%=rootpartof%></text>
                     <br>
                     <%
                         for(String str:partof)
