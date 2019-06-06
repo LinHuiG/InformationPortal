@@ -3,7 +3,7 @@ function logout() {
 
     $.ajax({
         type:"post",
-        url:"/InformationPortal_war_exploded/LogoutServlet",
+        url:"/LogoutServlet",
         success: function () {
             location.reload();
         }

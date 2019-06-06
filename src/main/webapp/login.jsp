@@ -14,7 +14,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <base href="<%=basePath%>">
     <title>河海大学实验中心门户登录</title>
 </head>
 <body onload="initBody()">

@@ -7,8 +7,8 @@
     password:密码
     -->
     <SQL>
-        <JDBC_DRIVER>com.mysql.cj.jdbc.Driver</JDBC_DRIVER>
-        <url>jdbc:mysql://localhost:3306/testInformationPortal?serverTimezone=CTT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</url>
+        <JDBC_DRIVER>com.mysql.jdbc.Driver</JDBC_DRIVER>
+        <url>jdbc:mysql://localhost:3306/InformationPortal?serverTimezone=CTT&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</url>
         <username>root</username>
         <password>123456</password>
     </SQL>
