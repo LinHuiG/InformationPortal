@@ -81,7 +81,7 @@
                                     List<String>list1=Operation.getPartof("实验教学");
                                     for(String s:list1){
                                 %>
-                                <a style="color:whitesmoke" ><%=s%></a><br>
+                                <a style="color:whitesmoke" href="getpart.jsp?partof=<%=s%>"><%=s%></a><br>
                                 <%
                                     }
                                 %>
@@ -90,18 +90,67 @@
                         </div>
                     </td>
                     <td class="title01">
+                        <div class="dropdown">
+                            <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=实验队伍">实验队伍</a>
+                            <div class="dropdown-content">
+                                <%
+                                    List<String>list2=Operation.getPartof("实验队伍");
+                                    for(String s:list2){
+                                %>
+                                <a style="color:whitesmoke" href="getpart.jsp?partof=<%=s%>"><%=s%></a><br>
+                                <%
+                                    }
+                                %>
+                            </div>
+                        </div>
 
-                        <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=实验队伍">实验队伍</a>
+                    </td>
+                    <td class="title01">
 
+                        <div class="dropdown">
+                            <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=管理模式">管理模式</a>
+                            <div class="dropdown-content">
+                                <%
+                                    List<String>list3=Operation.getPartof("管理模式");
+                                    for(String s:list3){
+                                %>
+                                <a style="color:whitesmoke" href="getpart.jsp?partof=<%=s%>"><%=s%></a><br>
+                                <%
+                                    }
+                                %>
+                            </div>
+                        </div>
                     </td>
                     <td class="title01">
-                        <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=管理模式">管理模式</a>
+
+                        <div class="dropdown">
+                            <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=设备与环境">设备与环境</a>
+                            <div class="dropdown-content">
+                                <%
+                                    List<String>list4=Operation.getPartof("设备与环境");
+                                    for(String s:list4){
+                                %>
+                                <a style="color:whitesmoke" href="getpart.jsp?partof=<%=s%>"><%=s%></a><br>
+                                <%
+                                    }
+                                %>
+                            </div>
+                        </div>
                     </td>
                     <td class="title01">
-                        <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=设备与环境">设备与环境</a>
-                    </td>
-                    <td class="title01">
+                        <div class="dropdown">
                         <a style="color: whitesmoke" href="getrootpart.jsp?rootpartof=成果展示">成果展示</a>
+                        <div class="dropdown-content">
+                            <%
+                                List<String>list5=Operation.getPartof("成果展示");
+                                for(String s:list5){
+                            %>
+                            <a style="color:whitesmoke" href="getpart.jsp?partof=<%=s%>"><%=s%></a><br>
+                            <%
+                                }
+                            %>
+                        </div>
+                        </div>
                     </td>
                 </tr>
             </table>
