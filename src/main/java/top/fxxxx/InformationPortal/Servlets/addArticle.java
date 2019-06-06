@@ -66,6 +66,7 @@ public class addArticle extends HttpServlet {
                 request.getRequestDispatcher("./getpart.jsp?partof=" + article.getPartof()).forward(request, response);
                 return;
             }
+            if(title==null||title.equals(""))title="无标题";
             article.setTitle(title);
             article.setPartof(partof);
             article.setRootpartof(rootpartof);

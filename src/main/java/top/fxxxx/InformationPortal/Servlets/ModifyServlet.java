@@ -58,9 +58,16 @@ public class ModifyServlet extends HttpServlet {
             out.print("</script>");
             return;
         }
+        if (!aim.equals("") && holder.getPermissions()<=acc.getPermissions()) {
+            out.print("<script type=\"text/javascript\"> ");
+            out.println("alert('您没有权限修改此账户');");
+            out.println("location.href='control.jsp';");
+            out.print("</script>");
+            return;
+        }
 
         if (request.getParameter("sc") != null && request.getParameter("sc").equals("1")) {
-            if (holder.getPermissions()>=3)
+            if (holder.getPermissions()>=3&&holder.getPermissions()>acc.getPermissions())
             {
                 Operation.deleteAccount(acc.getName());
                 request.getRequestDispatcher("./control.jsp?").forward(request, response);
@@ -68,7 +75,7 @@ public class ModifyServlet extends HttpServlet {
             else
             {
                 out.print("<script type=\"text/javascript\"> ");
-                out.println("alert('您没有权限删除他人账号');");
+                out.println("alert('您没有权限删除此账号');");
                 out.println("location.href='" + (aim.equals("") ? "manage.jsp" : "control.jsp?acc=" + aim) + "';");
                 out.print("</script>");
 
@@ -92,10 +99,17 @@ public class ModifyServlet extends HttpServlet {
             }
         }
         if (profile != null && !profile.equals("")) acc.setInfo(profile);
-        if (permission != null && !permission.equals("")) {
-            if (holder.getPermissions()<3&& Integer.valueOf(permission)!=acc.getPermissions()) {
+        if (permission != null && !permission.equals("")&& Integer.valueOf(permission)!=acc.getPermissions()) {
+            if (holder.getPermissions()<3) {
                 out.print("<script type=\"text/javascript\"> ");
                 out.println("alert('您不能修改他人权限');");
+                out.println("location.href='" + (aim.equals("") ? "manage.jsp" : "control.jsp?acc=" + aim) + "';");
+                out.print("</script>");
+                return;
+            }
+            if (Integer.valueOf(permission)>=holder.getPermissions()) {
+                out.print("<script type=\"text/javascript\"> ");
+                out.println("alert('您只能赋予他人低于您的权限，除root账号外权限最高为3');");
                 out.println("location.href='" + (aim.equals("") ? "manage.jsp" : "control.jsp?acc=" + aim) + "';");
                 out.print("</script>");
                 return;

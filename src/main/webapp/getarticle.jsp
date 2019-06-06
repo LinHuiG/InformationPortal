@@ -82,9 +82,11 @@
                 <div style="margin: 0px">
                     <%=article.getContent()%>
                 </div>
+                <div style="height: 100px;margin: 10px" ></div>
             </div>
         </td>
     </tr>
 </table>
+
 </body>
 </html>

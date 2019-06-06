@@ -50,9 +50,9 @@
                         String aim = request.getParameter("acc");
                         if (aim == null) return;
                         Account res = Operation.getAccount(aim);
-                        if (acc.getPermissions() < res.getPermissions()) {
+                        if (acc.getPermissions() <= res.getPermissions()) {
                     %>
-                    <a style="color: black" href="index.jsp">您无权修改比您权限高的用户！</a>
+                    <a style="color: black" href="index.jsp">您无权修改比您权限高或与您权限相同的用户！</a>
                     <%
                             return;
                         }
