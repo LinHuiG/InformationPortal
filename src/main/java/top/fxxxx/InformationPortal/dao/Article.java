@@ -1,26 +1,36 @@
 package top.fxxxx.InformationPortal.dao;
 
-public class Article
-{
+public class Article {
     private String title;
     private String author;
     private String content;
     private long id;
     private long mydate;
     private String partof;
-    public Article(String title,String author,String content,long mydate,String partof,long id)
-    {
-        this.author=author;
-        this.content=content;
-        this.title=title;
-        this.id=id;
-        this.partof=partof;
-        this.mydate=mydate;
+    private String rootpartof;
+
+    public Article(String title, String author, String content, long mydate, String partof, String rootpartof, long id) {
+        this.author = author;
+        this.content = content;
+        this.title = title;
+        this.id = id;
+        this.partof = partof;
+        this.mydate = mydate;
+        this.rootpartof = rootpartof;
     }
-    public Article()
-    {
-        title=author=content=partof="";
+
+    public Article() {
+        rootpartof = title = author = content = partof = "";
     }
+
+    public void setRootpartof(String rootpartof) {
+        this.rootpartof = rootpartof;
+    }
+
+    public String getRootpartof() {
+        return rootpartof;
+    }
+
     public long getMydate() {
         return mydate;
     }

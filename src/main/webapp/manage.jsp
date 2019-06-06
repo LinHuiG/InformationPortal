@@ -65,7 +65,14 @@ if(password.value!==check.value){
                     <a style="color: black" href="control.jsp">设置账户</a>
                     <%
                             }
+                        if (acc.getPermissions() >= 3) {
+                    %>
+                    <a style="color: black" href="addpartof.jsp">设置模块</a>
+                    <%
+                            }
+
                         }
+
                     %>
                 </div>
             </div>

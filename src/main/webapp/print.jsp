@@ -18,18 +18,18 @@
     <table class="subblock">
 
     <%
-        String part=request.getParameter("partname");
+        String rootpart=request.getParameter("partname");
     %>
     <tr>
         <td class="title02">
-            <a style="color: black" href="getpart.jsp?partof=<%=part%>"><%=part%></a>
+            <a style="color: black" href="getrootpart.jsp?rootpartof=<%=rootpart%>"><%=rootpart%></a>
         </td>
     </tr>
         <%
-        int num=Operation.getArticlePartofNum(part);
+        int num=Operation.getArticleRootpartofNum(rootpart);
         num=Math.min(num,6);
         assert (num!=0);
-        for (Article article:Operation.getArticlePartof(part,0,num)){
+        for (Article article:Operation.getArticleRootpartof(rootpart,0,num)){
             String titlecut=article.getTitle();
             if(titlecut.length()>20)
             {

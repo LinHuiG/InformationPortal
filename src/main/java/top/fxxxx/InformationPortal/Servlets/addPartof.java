@@ -1,7 +1,6 @@
 package top.fxxxx.InformationPortal.Servlets;
 
 import top.fxxxx.InformationPortal.dao.Account;
-import top.fxxxx.InformationPortal.dao.Article;
 import top.fxxxx.InformationPortal.dao.Operation;
 
 import javax.servlet.ServletException;
@@ -12,21 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 
-@WebServlet("/addArticle")
-public class addArticle extends HttpServlet {
+@WebServlet("/addPartof")
+public class addPartof extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+        doPost(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(true);
         if (session.getAttribute("Account") == null) {
-
             response.setContentType("text/html;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
@@ -37,7 +33,7 @@ public class addArticle extends HttpServlet {
             return;
         }
         Account account = (Account) session.getAttribute("Account");
-        if (account.getPermissions() < 1)
+        if (account.getPermissions() < 3)
         {
             response.setContentType("text/html;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
@@ -48,31 +44,25 @@ public class addArticle extends HttpServlet {
             out.print("</script>");
             return;
         }
-        Article article = (Article) session.getAttribute("Article");
-        String gx = request.getParameter("gx");//0更新文章 1新文章
-        String title = request.getParameter("title1");
-        String partof = request.getParameter("partof");
-        String content = request.getParameter("editor1");
-        String rootpartof = request.getParameter("rootpartof");
-        long date = new Date().getTime();
-        if (gx.equals("1")) {
-            article = new Article(title, account.getName(), content, date, partof,rootpartof, date);
-            Operation.insertArticle(article);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        String rootpartof=request.getParameter("rootpartof");
+        String partof=request.getParameter("newpartof");
+        String sc=request.getParameter("sc");
+        if (rootpartof!=null&&!rootpartof.equals(""))
+        {
 
-        } else {
-            if (request.getParameter("sc") != null && request.getParameter("sc").equals("1"))
+            if (partof!=null&&!partof.equals(""))
             {
-                Operation.deleteArticle(article.getId());
-                request.getRequestDispatcher("./getpart.jsp?partof=" + article.getPartof()).forward(request, response);
-                return;
+                if(sc.equals("1"))
+                {
+                    Operation.deletePartof(rootpartof,partof);
+                    request.getRequestDispatcher("./index.jsp").forward(request, response);
+                    return;
+                }
+                Operation.insertPartof(rootpartof,partof);
+                request.getRequestDispatcher("./index.jsp").forward(request, response);
             }
-            article.setTitle(title);
-            article.setPartof(partof);
-            article.setRootpartof(rootpartof);
-            article.setContent(content);
-            date = article.getMydate();
-            Operation.updateArticle(article);
         }
-        request.getRequestDispatcher("./getarticle.jsp?article_id=" + date).forward(request, response);
     }
 }

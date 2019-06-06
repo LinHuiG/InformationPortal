@@ -25,6 +25,12 @@ public class DataInformation {
             System.out.println("创建Article表失败");
             return;
         }
+        i=creatPartof();
+        if(i!=0)
+        {
+            System.out.println("创建Partof表失败");
+            return;
+        }
     }
     public static Connection getConn(){
         try {
@@ -83,11 +89,32 @@ public class DataInformation {
                 "   title VARCHAR(100),\n" +
                 "   author VARCHAR(100) NOT NULL,\n" +
                 "   partof VARCHAR(100) NOT NULL,\n" +
+                "   rootpartof VARCHAR(100) NOT NULL,\n" +
                 "   mydate BIGINT NOT NULL,\n" +
                 "   content LONGTEXT NOT NULL,\n" +
                 "   id BIGINT NOT NULL,\n" +
                 "   PRIMARY KEY ( id ),\n" +
                 "   KEY ( mydate )\n" +
+                ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+        Connection conn = DataInformation.getConn();
+        int i = -1;
+        PreparedStatement pstmt;
+        try {
+            pstmt = (PreparedStatement) conn.prepareStatement(sql);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+    static int creatPartof()
+    {
+        String sql= "CREATE TABLE IF NOT EXISTS partof(\n" +
+                "   partof VARCHAR(100) NOT NULL,\n" +
+                "   rootpartof VARCHAR(100) NOT NULL,\n" +
+                "   PRIMARY KEY ( partof )" +
                 ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         Connection conn = DataInformation.getConn();
         int i = -1;
