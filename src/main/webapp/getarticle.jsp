@@ -16,11 +16,12 @@
     long id = Long.valueOf(request.getParameter("article_id"));
     Article article = Operation.getArticle(id);
     String DateTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date(article.getMydate()));
-    session.setAttribute("Article",article);
+    session.setAttribute("Article", article);
 %>
 <html>
 <head>
-    <title><%=article.getTitle()%></title>
+    <title><%=article.getTitle()%>
+    </title>
     <style>
 
         #mtitle {
@@ -41,6 +42,17 @@
             font-family: 微软雅黑;
             font-size: larger;
         }
+
+        .fg {
+            background-image: url(Image/posSplit.gif);
+            background-repeat: no-repeat;
+            background-position: left center;
+            text-indent: 22px;
+            background-position: center;
+            width: 10px;
+            display: inline-block;
+            border: 0px solid red;
+        }
     </style>
 </head>
 <body>
@@ -52,21 +64,37 @@
 <table width="1002" align="center">
     <tr>
         <td width="100%" height="100%" class="enbed">
+            <div style="margin: 0px">
+                <a href="index.jsp" style="font-family: 宋体;color: grey;">首页</a>
+                <span class="fg">&nbsp;&nbsp;</span>
+                <a href="getrootpart.jsp?rootpartof=<%=article.getRootpartof()%>"
+                   style="font-family: 宋体;color: grey;"><%=article.getRootpartof()%>
+                </a>
+                <%
+                    if (!article.getRootpartof().equals(article.getPartof())) {
+                %>
+                <span class="fg">&nbsp;&nbsp;</span>
+                <a href="getpart.jsp?partof=<%=article.getPartof()%>"
+                   style="font-family: 宋体;color: grey;"><%=article.getPartof()%>
+                </a>
+                <%
+                    }
+                %>
+            </div>
             <div id="mtitle">
 
                 <div id="mtitle2">
                     <text id="mtitle3">
                         <%
-                            Account acc=null;
-                            if(session.getAttribute("Account")!=null)
-                                acc=(Account) session.getAttribute("Account");
-                            if (acc!=null&&(acc.getPermissions()>= 1))
-                            {
+                            Account acc = null;
+                            if (session.getAttribute("Account") != null)
+                                acc = (Account) session.getAttribute("Account");
+                            if (acc != null && (acc.getPermissions() >= 1)) {
                         %>
-                        <a style="color: black" id="mtitle3" href="ekeditor.jsp?gx=0"><%=article.getTitle()%></a>
+                        <a style="color: black" id="mtitle3" href="ekeditor.jsp?gx=0"><%=article.getTitle()%>
+                        </a>
                         <%
-                            }
-                            else out.print(article.getTitle());
+                            } else out.print(article.getTitle());
                         %>
                     </text>
                 </div>
@@ -82,7 +110,7 @@
                 <div style="margin: 0px">
                     <%=article.getContent()%>
                 </div>
-                <div style="height: 100px;margin: 10px" ></div>
+                <div style="height: 100px;margin: 10px"></div>
             </div>
         </td>
     </tr>
